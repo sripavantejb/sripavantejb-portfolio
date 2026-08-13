@@ -1,0 +1,55 @@
+.glow-particle-card {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 220px;
+  --glow-color: 200, 245, 66;
+}
+
+.glow-particle-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 4px;
+  background: radial-gradient(
+    var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.9)) 0%,
+    rgba(var(--glow-color), calc(var(--glow-intensity) * 0.35)) 35%,
+    transparent 65%
+  );
+  border-radius: inherit;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.glow-particle-card:hover {
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4), 0 0 30px rgba(var(--glow-color), 0.18);
+}
+
+.glow-particle-card .gpc-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(var(--glow-color), 1);
+  box-shadow: 0 0 6px rgba(var(--glow-color), 0.6);
+  pointer-events: none;
+  z-index: 4;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-particle-card::after {
+    display: none;
+  }
+}
