@@ -1,13 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, MapPin } from "lucide-react";
 import { profile, stats } from "@/lib/data";
 import { BrutalistLink } from "@/components/ui/BrutalistLink";
 import { StaggerWords, EASE } from "@/components/motion";
 import { stickySlide1 } from "@/lib/stickyStack";
-import { LinkedinIcon } from "@/components/ui/BrandIcons";
 import SideRays from "@/components/ui/SideRays";
 import { CountUp } from "@/components/ui/CountUp";
 
@@ -35,7 +33,7 @@ export function HeroSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050505]/40 to-[#050505]" />
       </div>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-[1200px] items-center gap-10 md:grid-cols-[1.15fr_0.9fr] md:gap-12">
+      <div className="relative z-10 mx-auto w-full max-w-[1200px]">
         <div className="min-w-0">
           {profile.openToWork && (
             <motion.div
@@ -103,66 +101,6 @@ export function HeroSection() {
             </BrutalistLink>
           </motion.div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 36, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
-          className="relative w-full"
-        >
-          <motion.div
-            animate={{ opacity: [0.2, 0.45, 0.2], scale: [1, 1.04, 1] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute -inset-5 rounded-[36px] bg-lime/15 blur-3xl"
-          />
-          <div className="relative min-w-0 rounded-[24px] border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl sm:p-6">
-            <div className="relative mx-auto h-16 w-16 overflow-hidden rounded-full border-2 border-lime/60">
-              <Image
-                src="/images/profile-photo.jpg"
-                alt="Sri Pavan Tej Balam"
-                fill
-                sizes="64px"
-                className="object-cover"
-                priority
-              />
-            </div>
-
-            <div className="mt-5 space-y-2.5">
-              <a
-                href={`mailto:${profile.email}`}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 transition-colors hover:border-lime/40 hover:bg-white/[0.06]"
-              >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-lime/15 text-lime">
-                  <Mail size={14} />
-                </span>
-                <span className="font-inter text-sm font-medium text-white/85">{profile.email}</span>
-              </a>
-              <a
-                href={profile.phoneHref}
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 transition-colors hover:border-lime/40 hover:bg-white/[0.06]"
-              >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-lime/15 text-lime">
-                  <Phone size={14} />
-                </span>
-                <span className="font-inter text-sm font-medium text-white/85">{profile.phone}</span>
-              </a>
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 transition-colors hover:border-lime/40 hover:bg-white/[0.06]"
-              >
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-lime/15 text-lime">
-                  <LinkedinIcon size={14} />
-                </span>
-                <span className="flex-1 font-inter text-sm font-medium text-white/85">
-                  in/sripavantejbalam
-                </span>
-                <ArrowUpRight size={14} className="text-white/30" />
-              </a>
-            </div>
-          </div>
-        </motion.div>
       </div>
 
       <motion.div
