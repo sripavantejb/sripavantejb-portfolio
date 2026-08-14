@@ -89,15 +89,6 @@ export function HeroSection() {
             {profile.location}
           </motion.p>
 
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.65 }}
-            className="mt-5 max-w-lg font-syne text-sm italic text-white/50 md:text-base"
-          >
-            &ldquo;{profile.tagline}&rdquo;
-          </motion.p>
-
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
@@ -125,21 +116,15 @@ export function HeroSection() {
             className="absolute -inset-5 rounded-[36px] bg-lime/15 blur-3xl"
           />
           <div className="relative min-w-0 rounded-[24px] border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl sm:p-6">
-            <div className="flex items-center gap-3">
-              <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-lime/60">
-                <Image
-                  src="/images/profile-photo.jpg"
-                  alt="Sri Pavan Tej Balam"
-                  fill
-                  sizes="56px"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              <div>
-                <p className="font-inter text-base font-semibold text-white">Quick connect</p>
-                <p className="mt-0.5 font-inter text-sm text-white/40">Usually replies within a day</p>
-              </div>
+            <div className="relative mx-auto h-16 w-16 overflow-hidden rounded-full border-2 border-lime/60">
+              <Image
+                src="/images/profile-photo.jpg"
+                alt="Sri Pavan Tej Balam"
+                fill
+                sizes="64px"
+                className="object-cover"
+                priority
+              />
             </div>
 
             <div className="mt-5 space-y-2.5">
@@ -194,7 +179,6 @@ export function HeroSection() {
             <p className="mt-1 font-inter text-xs font-semibold uppercase tracking-wide text-white/50 md:text-sm">
               {s.label}
             </p>
-            <p className="font-inter text-xs text-white/30">{s.note}</p>
           </div>
         ))}
       </motion.div>
