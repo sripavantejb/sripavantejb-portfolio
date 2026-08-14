@@ -8,6 +8,7 @@ import { StaggerWords, EASE } from "@/components/motion";
 import { stickySlide1 } from "@/lib/stickyStack";
 import SideRays from "@/components/ui/SideRays";
 import { CountUp } from "@/components/ui/CountUp";
+import { GlowParticleCard } from "@/components/ui/GlowParticleCard";
 
 export function HeroSection() {
   return (
@@ -107,17 +108,20 @@ export function HeroSection() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.9 }}
-        className="relative z-10 mx-auto mt-14 grid w-full max-w-[1200px] grid-cols-2 gap-4 border-t border-white/10 pt-8 md:grid-cols-4 md:gap-6"
+        className="relative z-10 mx-auto mt-14 grid w-full max-w-[1200px] grid-cols-2 gap-3 md:grid-cols-4 md:gap-4"
       >
         {stats.map((s) => (
-          <div key={s.label}>
+          <GlowParticleCard
+            key={s.label}
+            className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 md:p-5"
+          >
             <p className="font-archivo text-2xl uppercase text-white md:text-4xl">
               <CountUp value={s.value} />
             </p>
             <p className="mt-1 font-inter text-xs font-semibold uppercase tracking-wide text-white/50 md:text-sm">
               {s.label}
             </p>
-          </div>
+          </GlowParticleCard>
         ))}
       </motion.div>
     </section>

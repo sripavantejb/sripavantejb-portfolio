@@ -1,3 +1,5 @@
+import SplitText from "@/components/ui/SplitText";
+
 export function SectionHeading({
   eyebrow,
   title,
@@ -20,7 +22,17 @@ export function SectionHeading({
       <span className="inline-block border-2 border-ink bg-lime px-3 py-1 font-inter text-[10px] font-black uppercase tracking-[0.2em] text-ink shadow-[3px_3px_0_0_#0a0a0a]">
         {eyebrow}
       </span>
-      <h2 className="mt-3 font-archivo text-3xl uppercase leading-[1.05] tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
+      <SplitText
+        tag="h2"
+        splitType="words"
+        delay={40}
+        duration={0.7}
+        ease="power3.out"
+        from={{ opacity: 0, y: 30 }}
+        to={{ opacity: 1, y: 0 }}
+        textAlign={align === "center" ? "center" : "left"}
+        className="mt-3 font-archivo text-3xl uppercase leading-[1.05] tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl"
+      >
         {accentWord ? (
           <>
             {parts[0]}
@@ -30,7 +42,7 @@ export function SectionHeading({
         ) : (
           title
         )}
-      </h2>
+      </SplitText>
       {description ? (
         <p
           className={`mt-4 max-w-2xl font-inter text-base font-medium leading-relaxed md:text-lg ${
