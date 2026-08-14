@@ -8,6 +8,7 @@ import { MarqueeStrip } from "@/components/sections/MarqueeStrip";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { AIBuildsSection } from "@/components/sections/AIBuildsSection";
+import { AwardsScrollExpandSection } from "@/components/sections/AwardsScrollExpandSection";
 import { AwardsSection } from "@/components/sections/AwardsSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { EducationSection } from "@/components/sections/EducationSection";
@@ -31,6 +32,7 @@ export default function Home() {
         <AboutSection />
         <ProjectsSection />
         <AIBuildsSection />
+        <AwardsScrollExpandSection />
         <AwardsSection />
         <SkillsSection />
         <EducationSection />
