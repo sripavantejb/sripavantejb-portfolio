@@ -6,6 +6,8 @@ import { profile } from "@/lib/data";
 import { BrutalistLink } from "@/components/ui/BrutalistLink";
 import { LinkedinIcon, InstagramIcon } from "@/components/ui/BrandIcons";
 import { sectionFlowAfter } from "@/lib/stickyStack";
+import { Magnet } from "@/components/ui/Magnet";
+import { ClickSpark } from "@/components/ui/ClickSpark";
 
 const links = [
   { label: "Email", value: profile.email, href: `mailto:${profile.email}`, icon: Mail },
@@ -60,33 +62,42 @@ export function ContactSection() {
           transition={{ delay: 0.15 }}
           className="mt-10 flex flex-wrap justify-center gap-4"
         >
-          <BrutalistLink href={`mailto:${profile.email}`} variant="primary">
-            <Mail size={16} /> Email Me
-          </BrutalistLink>
-          <BrutalistLink href={profile.linkedin} variant="dark" external>
-            LinkedIn <ArrowUpRight size={16} />
-          </BrutalistLink>
+          <ClickSpark sparkColor="#c8f542">
+            <div className="flex flex-wrap justify-center gap-4">
+              <Magnet padding={50} magnetStrength={6}>
+                <BrutalistLink href={`mailto:${profile.email}`} variant="primary">
+                  <Mail size={16} /> Email Me
+                </BrutalistLink>
+              </Magnet>
+              <Magnet padding={50} magnetStrength={6}>
+                <BrutalistLink href={profile.linkedin} variant="dark" external>
+                  LinkedIn <ArrowUpRight size={16} />
+                </BrutalistLink>
+              </Magnet>
+            </div>
+          </ClickSpark>
         </motion.div>
 
         <div className="mx-auto mt-16 grid max-w-2xl gap-4 border-t-2 border-white/10 pt-10 text-left sm:grid-cols-2">
           {links.map(({ label, value, href, icon: Icon }) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="flex items-center gap-3 border-2 border-white/10 bg-white/[0.03] px-4 py-3 transition-colors hover:border-lime hover:bg-white/[0.06]"
-            >
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-lime">
-                <Icon size={16} />
-              </span>
-              <span>
-                <span className="block font-inter text-xs font-semibold uppercase tracking-wide text-white/40">
-                  {label}
+            <Magnet key={label} padding={30} magnetStrength={10} wrapperClassName="block w-full">
+              <a
+                href={href}
+                target={href.startsWith("http") ? "_blank" : undefined}
+                rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className="flex items-center gap-3 border-2 border-white/10 bg-white/[0.03] px-4 py-3 transition-colors hover:border-lime hover:bg-white/[0.06]"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-lime">
+                  <Icon size={16} />
                 </span>
-                <span className="block font-inter text-sm font-semibold text-white">{value}</span>
-              </span>
-            </a>
+                <span>
+                  <span className="block font-inter text-xs font-semibold uppercase tracking-wide text-white/40">
+                    {label}
+                  </span>
+                  <span className="block font-inter text-sm font-semibold text-white">{value}</span>
+                </span>
+              </a>
+            </Magnet>
           ))}
         </div>
       </div>
