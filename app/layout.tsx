@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Syne, Archivo_Black, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
-import { ClientCursor } from "@/components/ui/ClientCursor";
 
 const syne = Syne({
   variable: "--font-syne",
@@ -79,7 +78,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to main content
         </a>
         <ScrollProgress />
-        <ClientCursor />
         {children}
       </body>
     </html>

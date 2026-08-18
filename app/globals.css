@@ -32,11 +32,6 @@ html {
   overflow-x: clip;
 }
 
-.hide-system-cursor,
-.hide-system-cursor * {
-  cursor: none !important;
-}
-
 body {
   background-color: var(--color-ink);
   scroll-behavior: smooth;

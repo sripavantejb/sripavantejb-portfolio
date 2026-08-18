@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Mail, Phone, ArrowUpRight } from "lucide-react";
+import { SiGithub, SiLeetcode, SiNpm } from "react-icons/si";
 import { profile } from "@/lib/data";
 import { BrutalistLink } from "@/components/ui/BrutalistLink";
 import { LinkedinIcon, InstagramIcon } from "@/components/ui/BrandIcons";
@@ -13,7 +14,10 @@ const links = [
   { label: "Email", value: profile.email, href: `mailto:${profile.email}`, icon: Mail },
   { label: "Phone / WhatsApp", value: profile.phone, href: profile.phoneHref, icon: Phone },
   { label: "LinkedIn", value: "in/sripavantejbalam", href: profile.linkedin, icon: LinkedinIcon },
-  { label: "Instagram", value: "@editco.media", href: profile.instagram, icon: InstagramIcon },
+  { label: "Instagram", value: "@yours.tej", href: profile.instagram, icon: InstagramIcon },
+  { label: "GitHub", value: "sripavantejb", href: profile.github, icon: SiGithub },
+  { label: "LeetCode", value: "sripavantejb", href: profile.leetcode, icon: SiLeetcode },
+  { label: "npm", value: "~sripavantejb", href: profile.npm, icon: SiNpm },
 ];
 
 export function ContactSection() {
@@ -78,7 +82,7 @@ export function ContactSection() {
           </ClickSpark>
         </motion.div>
 
-        <div className="mx-auto mt-16 grid max-w-2xl gap-4 border-t-2 border-white/10 pt-10 text-left sm:grid-cols-2">
+        <div className="mx-auto mt-16 grid max-w-3xl gap-4 border-t-2 border-white/10 pt-10 text-left sm:grid-cols-2 lg:grid-cols-3">
           {links.map(({ label, value, href, icon: Icon }) => (
             <Magnet key={label} padding={30} magnetStrength={10} wrapperClassName="block w-full">
               <a

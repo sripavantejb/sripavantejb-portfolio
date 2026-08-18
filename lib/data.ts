@@ -12,7 +12,10 @@ export const profile = {
   phoneHref: "tel:+918919926373",
   whatsapp: "https://wa.me/918919926373",
   linkedin: "https://www.linkedin.com/in/sripavantejbalam",
-  instagram: "https://www.instagram.com/editco.media/",
+  instagram: "https://www.instagram.com/yours.tej/",
+  github: "https://github.com/sripavantejb",
+  leetcode: "https://leetcode.com/sripavantejb",
+  npm: "https://www.npmjs.com/~sripavantejb",
   editco: "https://editcomedia.com",
   about: [
     "As Co-Founder of Editco Media, I contribute to creating impactful content, fostering community engagement, and designing memorable branding strategies — driving growth through strategic planning, MERN stack development, and graphic design.",
