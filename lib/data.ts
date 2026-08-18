@@ -29,6 +29,8 @@ export const stats = [
 ] as const;
 
 export type Experience = {
+  slug: string;
+  logo: string;
   title: string;
   org: string;
   type: string;
@@ -38,10 +40,18 @@ export type Experience = {
   arrangement: string;
   description: string;
   skills: string[];
+  relatedProjectIds?: number[];
+  relatedAwardTitles?: string[];
+  relatedAIBuildTitles?: string[];
+  showAllLeadership?: boolean;
+  showEducationAndCerts?: boolean;
+  statHighlightLabels?: string[];
 };
 
 export const experience: Experience[] = [
   {
+    slug: "nxtwave",
+    logo: "/images/nxtwave-logo.jpg",
     title: "Software Engineer (SDE Intern)",
     org: "NxtWave",
     type: "Internship",
@@ -52,8 +62,11 @@ export const experience: Experience[] = [
     description:
       "Immersed in a fast-paced environment, actively contributing to software development projects while enhancing technical skills and collaborating with a motivated engineering team.",
     skills: ["Engineering", "Python", "Data Science", "MEAN Stack", "JavaScript"],
+    showEducationAndCerts: true,
   },
   {
+    slug: "editco-media",
+    logo: "/images/editco-logo.jpg",
     title: "Co-Founder",
     org: "Editco Media",
     type: "Self-employed",
@@ -73,8 +86,14 @@ export const experience: Experience[] = [
       "Google & Meta Ads",
       "Video Editing",
     ],
+    relatedProjectIds: [1, 2],
+    relatedAIBuildTitles: ["Voice-First AI Call Agent + Clinic CRM"],
+    relatedAwardTitles: ["1st Place — BRAVE Startup Programme"],
+    statHighlightLabels: ["Agency revenue driven"],
   },
   {
+    slug: "niat-media-council",
+    logo: "/images/niat-media-council-logo.jpg",
     title: "President",
     org: "Media Council, NIAT",
     type: "Full-time (elected)",
@@ -85,6 +104,8 @@ export const experience: Experience[] = [
     description:
       "Elected President of the NIAT College Media Council. Led media coverage, creative direction, and workshops across ~2 years of campus events.",
     skills: ["Leadership", "Team Leadership", "Management", "Team Building"],
+    relatedAwardTitles: ["Elected President — Media Council, NIAT"],
+    showAllLeadership: true,
   },
 ];
 

@@ -2,10 +2,11 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { experience } from "@/lib/data";
 import { stickySlide2 } from "@/lib/stickyStack";
 
-const logos = ["/images/nxtwave-logo.jpg", "/images/editco-logo.jpg", "/images/niat-media-council-logo.jpg"];
 const rotations = ["md:-rotate-1", "md:rotate-1", "md:-rotate-1"];
 
 export function ExperienceSection() {
@@ -38,7 +39,7 @@ export function ExperienceSection() {
           {experience.map((role, i) => {
             return (
               <motion.div
-                key={role.title + role.org}
+                key={role.slug}
                 initial={{ opacity: 0, y: 36 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
@@ -48,11 +49,15 @@ export function ExperienceSection() {
                   x: -4,
                   transition: { type: "spring", stiffness: 400, damping: 22 },
                 }}
-                className={`group relative flex flex-col border-4 border-ink bg-white p-5 shadow-[8px_8px_0_0_#0a0a0a] transition-shadow hover:shadow-[12px_12px_0_0_#0a0a0a] md:p-6 ${rotations[i]}`}
+                className={rotations[i]}
+              >
+              <Link
+                href={`/experience/${role.slug}`}
+                className={`group relative flex h-full flex-col border-4 border-ink bg-white p-5 shadow-[8px_8px_0_0_#0a0a0a] transition-shadow hover:shadow-[12px_12px_0_0_#0a0a0a] md:p-6`}
               >
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <div className="relative h-12 w-12 overflow-hidden border-4 border-ink bg-white shadow-[4px_4px_0_0_#0a0a0a] transition-transform group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 group-hover:shadow-[6px_6px_0_0_#0a0a0a]">
-                    <Image src={logos[i]} alt={`${role.org} logo`} fill sizes="48px" className="object-cover" />
+                    <Image src={role.logo} alt={`${role.org} logo`} fill sizes="48px" className="object-cover" />
                   </div>
                   <span className="font-archivo text-3xl font-black leading-none tracking-tighter text-ink/15 md:text-4xl">
                     0{i + 1}
@@ -83,9 +88,13 @@ export function ExperienceSection() {
                   ))}
                 </div>
 
-                <div className="mt-auto pt-4">
+                <div className="mt-auto flex items-center justify-between pt-4">
                   <div className="h-1.5 w-10 bg-ink transition-all duration-300 group-hover:w-20" />
+                  <span className="flex items-center gap-1 font-inter text-xs font-bold uppercase tracking-wide text-ink/40 opacity-0 transition-opacity group-hover:opacity-100">
+                    View details <ArrowRight size={12} />
+                  </span>
                 </div>
+              </Link>
               </motion.div>
             );
           })}

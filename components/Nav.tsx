@@ -7,13 +7,13 @@ import { profile } from "@/lib/data";
 import { PillNavLinks } from "@/components/ui/PillNavLinks";
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#ai-builds", label: "AI Builds" },
-  { href: "#awards", label: "Awards" },
-  { href: "#skills", label: "Skills" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#about", label: "About" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#ai-builds", label: "AI Builds" },
+  { href: "/#awards", label: "Awards" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export function Nav() {
@@ -43,7 +43,7 @@ export function Nav() {
           }`}
         >
           <motion.a
-            href="#top"
+            href="/#top"
             whileHover={{ rotate: 360, scale: 1.08 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
             className="flex h-9 w-9 items-center justify-center rounded-full bg-lime font-archivo text-[10px] font-black uppercase tracking-wide text-ink"
