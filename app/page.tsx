@@ -13,8 +13,13 @@ import { SkillsSection } from "@/components/sections/SkillsSection";
 import { EducationSection } from "@/components/sections/EducationSection";
 import { LeadershipSection } from "@/components/sections/LeadershipSection";
 import { ContactSection } from "@/components/sections/ContactSection";
+import { listPublicProjects } from "@/lib/models/project";
 
-export default function Home() {
+export const revalidate = 60;
+
+export default async function Home() {
+  const projects = await listPublicProjects();
+
   return (
     <>
       <Nav />
@@ -29,7 +34,7 @@ export default function Home() {
         {/* Normal flowing content, layered above the sticky stack */}
         <MarqueeStrip />
         <AboutSection />
-        <ProjectsSection />
+        <ProjectsSection projects={projects} />
         <AIBuildsSection />
         <AwardsSection />
         <SkillsSection />

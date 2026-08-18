@@ -4,7 +4,6 @@ import { Nav } from "@/components/Nav";
 import { ExperienceDetail } from "@/components/sections/ExperienceDetail";
 import {
   experience,
-  projects,
   aiBuilds,
   awards,
   leadership,
@@ -13,6 +12,9 @@ import {
   stats,
   profile,
 } from "@/lib/data";
+import { listPublicProjects } from "@/lib/models/project";
+
+export const revalidate = 60;
 
 export function generateStaticParams() {
   return experience.map((role) => ({ slug: role.slug }));
@@ -44,6 +46,7 @@ export default async function ExperienceDetailPage({
   const role = experience.find((r) => r.slug === slug);
   if (!role) notFound();
 
+  const projects = await listPublicProjects();
   const relatedProjects = projects.filter((p) => role.relatedProjectIds?.includes(p.id));
   const relatedAIBuilds = aiBuilds.filter((b) => role.relatedAIBuildTitles?.includes(b.title));
   const relatedAwards = awards.filter((a) => role.relatedAwardTitles?.includes(a.title));

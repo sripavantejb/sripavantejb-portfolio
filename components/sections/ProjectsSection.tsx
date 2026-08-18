@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check } from "lucide-react";
-import { projects } from "@/lib/data";
+import type { Project } from "@/lib/data";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { sectionFlowAfter } from "@/lib/stickyStack";
 import { TiltCard } from "@/components/ui/TiltCard";
 
-export function ProjectsSection() {
+export function ProjectsSection({ projects }: { projects: Project[] }) {
   return (
     <section id="projects" className={`bg-paper py-24 text-ink md:py-32 ${sectionFlowAfter}`}>
       <div className="mx-auto max-w-[1200px] px-6">
