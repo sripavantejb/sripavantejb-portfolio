@@ -1,25 +1,28 @@
+import { Suspense } from "react";
 import { Nav } from "@/components/Nav";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { AwardsHighlightSection } from "@/components/sections/AwardsHighlightSection";
 import { WhyMeSection } from "@/components/sections/WhyMeSection";
-import { TechStackSection } from "@/components/sections/TechStackSection";
 import { MarqueeStrip } from "@/components/sections/MarqueeStrip";
-import { AboutSection } from "@/components/sections/AboutSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { AIBuildsSection } from "@/components/sections/AIBuildsSection";
-import { AwardsSection } from "@/components/sections/AwardsSection";
+import { FeaturedInSection } from "@/components/sections/FeaturedInSection";
+import { HackathonsSection } from "@/components/sections/HackathonsSection";
+import { OpenSourceSection } from "@/components/sections/OpenSourceSection";
+import { LeadershipSection } from "@/components/sections/LeadershipSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { EducationSection } from "@/components/sections/EducationSection";
-import { LeadershipSection } from "@/components/sections/LeadershipSection";
 import { ContactSection } from "@/components/sections/ContactSection";
-import { listPublicProjects } from "@/lib/models/project";
+import { getSeedProjects, listPublicProjects } from "@/lib/models/project";
 
 export const revalidate = 60;
 
-export default async function Home() {
+async function HomeProjects() {
   const projects = await listPublicProjects();
+  return <ProjectsSection projects={projects} />;
+}
 
+export default function Home() {
   return (
     <>
       <Nav />
@@ -29,17 +32,18 @@ export default async function Home() {
         <ExperienceSection />
         <AwardsHighlightSection />
         <WhyMeSection />
-        <TechStackSection />
 
         {/* Normal flowing content, layered above the sticky stack */}
         <MarqueeStrip />
-        <AboutSection />
-        <ProjectsSection projects={projects} />
-        <AIBuildsSection />
-        <AwardsSection />
+        <Suspense fallback={<ProjectsSection projects={getSeedProjects()} />}>
+          <HomeProjects />
+        </Suspense>
+        <FeaturedInSection />
+        <HackathonsSection />
+        <OpenSourceSection />
+        <LeadershipSection />
         <SkillsSection />
         <EducationSection />
-        <LeadershipSection />
         <ContactSection />
       </main>
     </>

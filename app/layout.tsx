@@ -1,28 +1,27 @@
 import type { Metadata } from "next";
-import { Syne, Archivo_Black, Inter, Space_Grotesk } from "next/font/google";
+import { Archivo_Black, Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
-
-const syne = Syne({
-  variable: "--font-syne",
-  subsets: ["latin"],
-});
 
 const archivoBlack = Archivo_Black({
   variable: "--font-archivo-black",
   weight: "400",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600"],
+  display: "swap",
+  preload: false,
 });
 
 const siteUrl = "https://sripavantejbalam.com";
@@ -65,7 +64,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${syne.variable} ${archivoBlack.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={`${archivoBlack.variable} ${inter.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <body
         suppressHydrationWarning

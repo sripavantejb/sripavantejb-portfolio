@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { skillGroups } from "@/lib/data";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { sectionFlowAfter } from "@/lib/stickyStack";
-import { Magnet } from "@/components/ui/Magnet";
 
 export function SkillsSection() {
   return (
@@ -27,11 +26,12 @@ export function SkillsSection() {
               </h3>
               <div className="mt-4 flex flex-wrap gap-2">
                 {group.skills.map((s) => (
-                  <Magnet key={s} padding={24} magnetStrength={14}>
-                    <span className="inline-block cursor-default border-2 border-ink px-3 py-1.5 font-inter text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-lime">
-                      {s}
-                    </span>
-                  </Magnet>
+                  <span
+                    key={s}
+                    className="inline-block cursor-default border-2 border-ink px-3 py-1.5 font-inter text-sm font-semibold text-ink transition-colors hover:bg-ink hover:text-lime"
+                  >
+                    {s}
+                  </span>
                 ))}
               </div>
             </motion.div>

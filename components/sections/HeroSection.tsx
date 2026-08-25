@@ -1,12 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { ArrowRight, MapPin } from "lucide-react";
 import { profile } from "@/lib/data";
 import { BrutalistLink } from "@/components/ui/BrutalistLink";
 import { StaggerWords, EASE } from "@/components/motion";
 import { stickySlide1 } from "@/lib/stickyStack";
-import SideRays from "@/components/ui/SideRays";
+
+const SideRays = dynamic(() => import("@/components/ui/SideRays"), {
+  ssr: false,
+});
 
 export function HeroSection() {
   return (
@@ -15,6 +19,14 @@ export function HeroSection() {
       className={`flex flex-col justify-start overflow-x-clip bg-[#050505] px-6 pb-16 pt-32 md:px-8 md:pb-20 md:pt-40 ${stickySlide1}`}
     >
       <div className="absolute inset-0 z-0 bg-[#050505]">
+        <div
+          className="pointer-events-none absolute -right-24 -top-32 h-[520px] w-[520px] rounded-full bg-lime/20 blur-[140px]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute right-0 top-0 h-[280px] w-[280px] rounded-full bg-sky/15 blur-[100px]"
+          aria-hidden
+        />
         <SideRays
           speed={2.2}
           rayColor1="#c8f542"

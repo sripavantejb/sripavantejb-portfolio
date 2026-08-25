@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "order": 0,
+    "slug": "agency-erp",
+    "title": "Agency ERP",
+    "dates": "Jun 2025 – Present",
+    "org": "Editco Media",
+    "category": "SaaS · ERP · Agency Management",
+    "role": "Full-Stack Developer",
+    "link": "/projects/agency-erp",
+    "linkLabel": "View Project",
+    "liveUrl": "https://editcomedia.com",
+    "stack": [
+      "React.js",
+      "Node.js",
+      "Express.js",
+      "MongoDB",
+      "TypeScript",
+      "Tailwind CSS",
+      "REST APIs"
+    ],
+    "description": "A unified ERP platform built to manage clients, projects, teams, finances, creative workflows, credentials, and agency operations from one centralized dashboard.",
+    "highlights": [
+      "Business & revenue dashboard",
+      "CRM & client management",
+      "Project & task management",
+      "Creative production workflows",
+      "Invoicing & finance",
+      "HR & employee management",
+      "Credential management",
+      "Automation-ready architecture",
+      "Analytics & reporting",
+      "Role-based access control"
+    ],
+    "outcome": "Centralized multiple agency workflows into a single operational platform, reducing dependency on scattered spreadsheets, communication tools, and separate management systems."
+  }
+]

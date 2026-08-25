@@ -1,6 +1,8 @@
 import { ObjectId } from "mongodb";
+import { cache } from "react";
 import { getDb } from "@/lib/mongodb";
 import type { Project } from "@/lib/data";
+import seedProjects from "@/lib/projects.seed.json";
 
 export type ProjectDoc = {
   _id?: ObjectId;
@@ -9,8 +11,12 @@ export type ProjectDoc = {
   title: string;
   dates: string;
   org: string;
+  slug?: string;
+  category?: string;
+  role?: string;
   link?: string;
   linkLabel?: string;
+  liveUrl?: string;
   stack: string[];
   description: string;
   highlights: string[];
@@ -29,8 +35,12 @@ function toAdmin(doc: ProjectDoc): ProjectAdmin {
     title: doc.title,
     dates: doc.dates,
     org: doc.org,
+    slug: doc.slug,
+    category: doc.category,
+    role: doc.role,
     link: doc.link,
     linkLabel: doc.linkLabel,
+    liveUrl: doc.liveUrl,
     stack: doc.stack,
     description: doc.description,
     highlights: doc.highlights,
@@ -49,21 +59,37 @@ export async function listProjects(): Promise<ProjectAdmin[]> {
   return docs.map(toAdmin);
 }
 
-export async function listPublicProjects(): Promise<Project[]> {
-  const admins = await listProjects();
-  return admins.map((p) => ({
+function toPublic(p: Omit<ProjectDoc, "_id">): Project {
+  return {
     id: p.id,
     title: p.title,
     dates: p.dates,
     org: p.org,
+    slug: p.slug,
+    category: p.category,
+    role: p.role,
     link: p.link,
     linkLabel: p.linkLabel,
+    liveUrl: p.liveUrl,
     stack: p.stack,
     description: p.description,
     highlights: p.highlights,
     outcome: p.outcome,
-  }));
+  };
 }
+
+export function getSeedProjects(): Project[] {
+  return [...seedProjects].sort((a, b) => a.order - b.order).map(toPublic);
+}
+
+/**
+ * Public-facing read. The portfolio catalog is the seed file so unpublished
+ * or leftover database rows cannot appear on the site. Admin reads still go
+ * to MongoDB.
+ */
+export const listPublicProjects = cache(async (): Promise<Project[]> => {
+  return getSeedProjects();
+});
 
 export async function createProject(input: Omit<ProjectDoc, "_id" | "id" | "order">): Promise<ProjectAdmin> {
   const col = await getProjectsCollection();

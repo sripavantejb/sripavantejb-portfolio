@@ -15,7 +15,7 @@ export function AIBuildsSection() {
           eyebrow="AI & Automation"
           title="Systems That Ship"
           light
-          description="National-finalist buildathon projects, a commercial AI product, and open-source contributions."
+          description="National-finalist buildathon projects and a commercial AI product."
         />
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">

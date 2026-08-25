@@ -13,7 +13,7 @@ export function ExperienceSection() {
   return (
     <section
       id="experience"
-      className={`flex flex-col justify-center bg-lime px-6 py-16 text-ink md:px-8 md:py-20 ${stickySlide2}`}
+      className={`flex flex-col justify-center bg-paper px-6 py-16 text-ink md:px-8 md:py-20 ${stickySlide2}`}
     >
       <div className="mx-auto w-full max-w-[1200px]">
         <motion.div
@@ -23,7 +23,7 @@ export function ExperienceSection() {
           transition={{ duration: 0.6 }}
           className="mb-8 max-w-3xl lg:mb-10"
         >
-          <span className="inline-block border-2 border-ink bg-white px-3 py-1 font-inter text-[10px] font-black uppercase tracking-[0.2em] text-ink shadow-[3px_3px_0_0_#0a0a0a]">
+          <span className="inline-block border-2 border-ink bg-lime px-3 py-1 font-inter text-[10px] font-black uppercase tracking-[0.2em] text-ink shadow-[3px_3px_0_0_#0a0a0a]">
             Experience
           </span>
           <h2 className="mt-3 font-archivo text-[clamp(1.75rem,8vw,3.75rem)] font-black uppercase leading-[1.05] tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">

@@ -6,7 +6,6 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { TagChip } from "@/components/ui/TagChip";
 import { sectionFlowAfter } from "@/lib/stickyStack";
 import { GlowParticleCard } from "@/components/ui/GlowParticleCard";
-import { BlurText } from "@/components/ui/BlurText";
 
 export function AboutSection() {
   return (
@@ -18,12 +17,16 @@ export function AboutSection() {
           <div className="flex flex-col justify-between">
             <div className="space-y-5">
               {profile.about.map((para) => (
-                <BlurText
+                <motion.p
                   key={para}
-                  text={para}
-                  delay={18}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5 }}
                   className="font-inter text-base font-medium leading-relaxed text-white/75 md:text-lg"
-                />
+                >
+                  {para}
+                </motion.p>
               ))}
             </div>
             <motion.div

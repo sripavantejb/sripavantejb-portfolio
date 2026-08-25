@@ -7,11 +7,12 @@ import { profile } from "@/lib/data";
 import { PillNavLinks } from "@/components/ui/PillNavLinks";
 
 const links = [
-  { href: "/#about", label: "About" },
   { href: "/#experience", label: "Experience" },
   { href: "/#projects", label: "Projects" },
-  { href: "/#ai-builds", label: "AI Builds" },
-  { href: "/#awards", label: "Awards" },
+  { href: "/#featured", label: "Featured" },
+  { href: "/#hackathons", label: "Hackathons" },
+  { href: "/#open-source", label: "Open Source" },
+  { href: "/#leadership", label: "Leadership" },
   { href: "/#skills", label: "Skills" },
   { href: "/#contact", label: "Contact" },
 ];
@@ -38,7 +39,7 @@ export function Nav() {
     <>
       <div className="fixed inset-x-0 top-4 z-[9999] flex justify-center px-4 md:top-6">
         <nav
-          className={`flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1.5 shadow-2xl backdrop-blur-xl transition-all ${
+          className={`flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1.5 shadow-2xl backdrop-blur-md transition-all ${
             scrolled ? "bg-ink/70" : ""
           }`}
         >

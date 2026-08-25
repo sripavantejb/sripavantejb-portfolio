@@ -1,97 +1,122 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Rocket, Target, Users2 } from "lucide-react";
 import { stickySlide4 } from "@/lib/stickyStack";
 import { MotionItem, MotionSection, fadeUp } from "@/components/motion";
+import { CountUp } from "@/components/ui/CountUp";
 
-const highlights = [
+const stats = [
+  { value: "7", label: "Products shipped" },
+  { value: "4", label: "AI systems" },
+  { value: "3", label: "National buildathons" },
+  { value: "2", label: "Published npm packages" },
+  { value: "1", label: "Open Source Award" },
+] as const;
+
+const currently = [
   {
-    icon: Rocket,
-    title: "Ships production code, fast",
-    body: "7 shipped projects and 4 AI systems in under a year — from MERN apps to national-buildathon builds.",
+    label: "Currently building",
+    value: "AI · SaaS · Automation · Developer tools",
   },
   {
-    icon: Target,
-    title: "Solves real problems",
-    body: "Built for actual users — clinics, farmers, HR leaders — not toy demos. Two clinics converted in 48 hours.",
+    label: "Currently leading",
+    value: "President — NIAT Media Council",
   },
   {
-    icon: Users2,
-    title: "Leads without being asked",
-    body: "Elected President of a ~2-year-running media council; co-founded and grew an agency from zero.",
+    label: "Currently exploring",
+    value: "Open Source · System Design · AI Engineering",
   },
-];
+] as const;
+
+const ticker = ["Building", "Learning", "Shipping", "Breaking things", "Fixing them"];
 
 export function WhyMeSection() {
+  const loop = [...ticker, ...ticker, ...ticker, ...ticker];
+
   return (
     <MotionSection
-      className={`flex flex-col justify-center bg-lime px-6 py-16 text-ink md:px-8 md:py-20 ${stickySlide4}`}
+      id="status"
+      className={`flex flex-col justify-between bg-paper px-6 py-14 text-ink md:px-8 md:py-16 ${stickySlide4}`}
     >
-      <div className="mx-auto grid w-full max-w-[1200px] gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-12">
+      <div className="mx-auto flex w-full max-w-[1200px] flex-1 flex-col justify-between gap-8">
         <MotionItem variants={fadeUp}>
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex rounded-full bg-white px-3.5 py-1.5 font-inter text-xs font-semibold tracking-wide"
-          >
-            Why hire me
-          </motion.span>
-          <h2 className="mt-4 max-w-lg font-inter text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
-            Built for teams that need someone who just ships
-          </h2>
-          <p className="mt-3 max-w-md font-inter text-sm leading-relaxed text-ink/65 md:text-base">
-            Full-stack fundamentals, a design eye, and the instinct to go find the problem before building the solution.
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-[0.22em] text-ink/45">
+            {"// Current status"}
           </p>
-          <div className="mt-6">
-            <div className="flex -space-x-1">
-              {["🏆", "🚀", "💡", "🎯", "⚡"].map((emoji, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.06, type: "spring" }}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-lime bg-ink text-sm"
-                >
-                  {emoji}
-                </motion.span>
-              ))}
-            </div>
-            <p className="mt-2 font-inter text-sm font-medium text-ink/70">
-              3 national buildathons · 1 startup win · 500+ network
-            </p>
+          <h2 className="mt-3 max-w-2xl font-archivo text-3xl font-black uppercase leading-[1.08] tracking-tight md:text-4xl lg:text-5xl">
+            Building things{" "}
+            <span className="inline bg-lime px-1.5 text-ink md:px-2">that should exist.</span>
+          </h2>
+          <p className="mt-4 max-w-xl font-inter text-sm font-medium leading-relaxed text-ink/65 md:text-base">
+            I&rsquo;m a full-stack developer who likes taking messy problems, figuring out how they work, and turning
+            them into products people can actually use.
+          </p>
+        </MotionItem>
+
+        <MotionItem variants={fadeUp}>
+          <div className="grid grid-cols-2 border-4 border-ink md:grid-cols-5">
+            {stats.map((stat, i) => (
+              <div
+                key={stat.label}
+                className={`bg-white px-4 py-4 md:px-5 md:py-5 ${i === 4 ? "col-span-2 md:col-span-1" : ""} ${
+                  i % 2 === 1 ? "max-md:border-l-4 max-md:border-ink" : ""
+                } ${i < 4 ? "max-md:border-b-4 max-md:border-ink" : ""} ${i > 0 ? "md:border-l-4 md:border-ink" : ""}`}
+              >
+                <p className="font-archivo text-4xl font-black leading-none tracking-tighter text-ink md:text-5xl">
+                  0<CountUp value={stat.value} />
+                </p>
+                <p className="mt-2 font-inter text-[10px] font-black uppercase tracking-[0.14em] text-ink/45 md:text-[11px]">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
           </div>
         </MotionItem>
 
-        <div className="space-y-3">
-          {highlights.map((item) => {
-            const Icon = item.icon;
-            return (
-              <MotionItem
-                key={item.title}
-                whileHover={{
-                  x: 6,
-                  backgroundColor: "rgba(255,255,255,0.75)",
-                  transition: { type: "spring", stiffness: 300, damping: 22 },
-                }}
-                className="flex gap-4 rounded-[22px] bg-white/55 p-4 backdrop-blur-sm"
+        <MotionItem variants={fadeUp}>
+          <div className="grid gap-3 md:grid-cols-3">
+            {currently.map((item) => (
+              <article
+                key={item.label}
+                className="border-4 border-ink bg-white p-4 shadow-[4px_4px_0_0_#0a0a0a] md:p-5"
               >
-                <motion.div
-                  whileHover={{ rotate: -6, scale: 1.06 }}
-                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white text-ink shadow-sm"
-                >
-                  <Icon size={20} strokeWidth={1.75} />
-                </motion.div>
-                <div>
-                  <h3 className="font-inter text-base font-semibold tracking-tight">{item.title}</h3>
-                  <p className="mt-1 font-inter text-sm leading-relaxed text-ink/60">{item.body}</p>
-                </div>
-              </MotionItem>
-            );
-          })}
-        </div>
+                <p className="font-inter text-[10px] font-black uppercase tracking-[0.18em] text-ink/50">
+                  {item.label}
+                </p>
+                <p className="mt-2 font-archivo text-sm uppercase leading-snug tracking-tight text-ink md:text-base">
+                  {item.value}
+                </p>
+              </article>
+            ))}
+          </div>
+        </MotionItem>
+
+        <MotionItem variants={fadeUp} className="space-y-4">
+          <p className="font-archivo text-lg uppercase tracking-tight text-ink md:text-xl">
+            Still looking for harder problems.
+          </p>
+          <div className="flex items-stretch overflow-hidden border-4 border-ink bg-white text-ink">
+            <div className="flex shrink-0 items-center gap-2 border-r-4 border-ink bg-lime px-3 py-2.5 md:px-4">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-ink opacity-70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-ink" />
+              </span>
+              <span className="font-inter text-[10px] font-black uppercase tracking-[0.18em]">Online</span>
+            </div>
+            <div className="hide-scrollbar flex min-w-0 flex-1 items-center overflow-hidden">
+              <div className="animate-ticker flex shrink-0 items-center gap-6 pr-6">
+                {loop.map((item, i) => (
+                  <span
+                    key={`${item}-${i}`}
+                    className="flex items-center gap-6 whitespace-nowrap font-archivo text-xs uppercase tracking-tight md:text-sm"
+                  >
+                    <span className="text-ink/35">Now</span>
+                    <span>→ {item}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </MotionItem>
       </div>
     </MotionSection>
   );

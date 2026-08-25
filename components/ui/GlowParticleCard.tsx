@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, type ReactNode } from "react";
 import { gsap } from "gsap";
 import "./GlowParticleCard.css";
 
-const PARTICLE_COUNT = 8;
+const PARTICLE_COUNT = 5;
 const GLOW_COLOR = "200, 245, 66";
 
 function createParticle(x: number, y: number) {
@@ -77,17 +77,14 @@ export function GlowParticleCard({
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (!window.matchMedia("(pointer: fine)").matches) return;
 
-    const onEnter = () => {
-      isHovered.current = true;
-      spawnParticles();
-      gsap.to(el, { rotateX: 5, rotateY: 5, duration: 0.3, ease: "power2.out", transformPerspective: 1000 });
-    };
-    const onLeave = () => {
-      isHovered.current = false;
-      clearParticles();
-      gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.3, ease: "power2.out" });
-    };
-    const onMove = (e: MouseEvent) => {
+    let moveRaf = 0;
+    let pending: MouseEvent | null = null;
+
+    const applyMove = () => {
+      moveRaf = 0;
+      const e = pending;
+      pending = null;
+      if (!e) return;
       const rect = el.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
@@ -102,11 +99,24 @@ export function GlowParticleCard({
         transformPerspective: 1000,
       });
 
-      const relX = (x / rect.width) * 100;
-      const relY = (y / rect.height) * 100;
-      el.style.setProperty("--glow-x", `${relX}%`);
-      el.style.setProperty("--glow-y", `${relY}%`);
+      el.style.setProperty("--glow-x", `${(x / rect.width) * 100}%`);
+      el.style.setProperty("--glow-y", `${(y / rect.height) * 100}%`);
       el.style.setProperty("--glow-intensity", "1");
+    };
+
+    const onEnter = () => {
+      isHovered.current = true;
+      spawnParticles();
+      gsap.to(el, { rotateX: 5, rotateY: 5, duration: 0.3, ease: "power2.out", transformPerspective: 1000 });
+    };
+    const onLeave = () => {
+      isHovered.current = false;
+      clearParticles();
+      gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.3, ease: "power2.out" });
+    };
+    const onMove = (e: MouseEvent) => {
+      pending = e;
+      if (!moveRaf) moveRaf = requestAnimationFrame(applyMove);
     };
 
     el.addEventListener("mouseenter", onEnter);
@@ -115,6 +125,7 @@ export function GlowParticleCard({
 
     return () => {
       isHovered.current = false;
+      if (moveRaf) cancelAnimationFrame(moveRaf);
       el.removeEventListener("mouseenter", onEnter);
       el.removeEventListener("mouseleave", onLeave);
       el.removeEventListener("mousemove", onMove);
