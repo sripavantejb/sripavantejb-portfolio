@@ -16,19 +16,27 @@ export function BrutalistLink({
   variant = "primary",
   children,
   external,
+  download,
   className = "",
 }: {
   href: string;
   variant?: Variant;
   children: ReactNode;
   external?: boolean;
+  download?: boolean | string;
   className?: string;
 }) {
   const classes = `inline-flex cursor-pointer items-center justify-center gap-2 px-6 py-3 font-archivo text-sm font-black uppercase tracking-wide transition-transform md:px-8 md:py-4 md:text-base ${variantClasses[variant]} ${className}`;
 
-  if (external) {
+  if (external || download) {
     return (
-      <a href={href} target="_blank" rel="noopener noreferrer" className={classes}>
+      <a
+        href={href}
+        target={external ? "_blank" : undefined}
+        rel={external ? "noopener noreferrer" : undefined}
+        download={download || undefined}
+        className={classes}
+      >
         {children}
       </a>
     );

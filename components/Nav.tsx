@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 import { profile } from "@/lib/data";
+import { RESUME_DOWNLOAD_PATH } from "@/lib/resume";
 import { PillNavLinks } from "@/components/ui/PillNavLinks";
 
 const links = [
@@ -17,7 +18,7 @@ const links = [
   { href: "/#contact", label: "Contact" },
 ];
 
-export function Nav() {
+export function Nav({ resumeAvailable = false }: { resumeAvailable?: boolean }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -60,6 +61,15 @@ export function Nav() {
           >
             Hire Me
           </a>
+          {resumeAvailable ? (
+            <a
+              href={RESUME_DOWNLOAD_PATH}
+              download
+              className="hidden rounded-full border border-lime px-4 py-2 font-archivo text-xs font-black uppercase tracking-wide text-lime md:inline-flex"
+            >
+              CV
+            </a>
+          ) : null}
           <button
             onClick={() => setOpen(true)}
             aria-label="Open menu"
@@ -100,6 +110,19 @@ export function Nav() {
                   {l.label}
                 </motion.a>
               ))}
+              {resumeAvailable ? (
+                <motion.a
+                  href={RESUME_DOWNLOAD_PATH}
+                  download
+                  onClick={() => setOpen(false)}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 + links.length * 0.06 }}
+                  className="flex items-center gap-2 font-archivo text-[clamp(1.5rem,8vw,3rem)] uppercase tracking-tight text-lime"
+                >
+                  Download CV <Download size={24} />
+                </motion.a>
+              ) : null}
             </div>
           </motion.div>
         )}

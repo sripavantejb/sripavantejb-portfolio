@@ -14,6 +14,7 @@ import { SkillsSection } from "@/components/sections/SkillsSection";
 import { EducationSection } from "@/components/sections/EducationSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { getSeedProjects, listPublicProjects } from "@/lib/models/project";
+import { getResumeAvailability } from "@/lib/models/resume";
 
 export const revalidate = 60;
 
@@ -22,13 +23,15 @@ async function HomeProjects() {
   return <ProjectsSection projects={projects} />;
 }
 
-export default function Home() {
+export default async function Home() {
+  const resumeAvailable = await getResumeAvailability();
+
   return (
     <>
-      <Nav />
+      <Nav resumeAvailable={resumeAvailable} />
       <main id="main" className="flex flex-1 flex-col overflow-x-clip [scroll-behavior:smooth]">
         {/* Sticky-stacking intro (desktop): each slide pins full-screen while the next covers it */}
-        <HeroSection />
+        <HeroSection resumeAvailable={resumeAvailable} />
         <ExperienceSection />
         <AwardsHighlightSection />
         <WhyMeSection />
@@ -44,7 +47,7 @@ export default function Home() {
         <LeadershipSection />
         <SkillsSection />
         <EducationSection />
-        <ContactSection />
+        <ContactSection resumeAvailable={resumeAvailable} />
       </main>
     </>
   );

@@ -1,4 +1,5 @@
 import { listProjects } from "@/lib/models/project";
+import { getResumeMetadata } from "@/lib/models/resume";
 import { AdminDashboard } from "@/components/admin/AdminDashboard";
 
 // Session-gated and always reflects live database content, so it must never be
@@ -6,6 +7,9 @@ import { AdminDashboard } from "@/components/admin/AdminDashboard";
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  const projects = await listProjects();
-  return <AdminDashboard initialProjects={projects} />;
+  const [projects, resume] = await Promise.all([
+    listProjects(),
+    getResumeMetadata().catch(() => null),
+  ]);
+  return <AdminDashboard initialProjects={projects} initialResume={resume} />;
 }

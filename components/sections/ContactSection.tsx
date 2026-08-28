@@ -1,9 +1,10 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight, Download, Mail } from "lucide-react";
 import { SiGithub, SiLeetcode, SiNpm } from "react-icons/si";
 import { profile } from "@/lib/data";
+import { RESUME_DOWNLOAD_PATH } from "@/lib/resume";
 import { LinkedinIcon, InstagramIcon } from "@/components/ui/BrandIcons";
 import { ClickSpark } from "@/components/ui/ClickSpark";
 import { CountUp } from "@/components/ui/CountUp";
@@ -27,7 +28,7 @@ const socials = [
   { label: "Instagram", href: profile.instagram, icon: InstagramIcon },
 ] as const;
 
-export function ContactSection() {
+export function ContactSection({ resumeAvailable = false }: { resumeAvailable?: boolean }) {
   const reduceMotion = useReducedMotion();
   const fade = (delay = 0) =>
     reduceMotion
@@ -74,6 +75,15 @@ export function ContactSection() {
                 >
                   LinkedIn <ArrowUpRight size={14} strokeWidth={2.5} />
                 </a>
+                {resumeAvailable ? (
+                  <a
+                    href={RESUME_DOWNLOAD_PATH}
+                    download
+                    className="inline-flex items-center justify-center gap-2 border-2 border-ink bg-lime px-5 py-2.5 font-archivo text-xs font-black uppercase tracking-wide text-ink shadow-[3px_3px_0_0_#0a0a0a] transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[5px_5px_0_0_#0a0a0a]"
+                  >
+                    Download CV <Download size={14} strokeWidth={2.5} />
+                  </a>
+                ) : null}
               </div>
             </ClickSpark>
           </motion.div>

@@ -2,8 +2,9 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, Download, MapPin } from "lucide-react";
 import { profile } from "@/lib/data";
+import { RESUME_DOWNLOAD_PATH } from "@/lib/resume";
 import { BrutalistLink } from "@/components/ui/BrutalistLink";
 import { StaggerWords, EASE } from "@/components/motion";
 import { stickySlide1 } from "@/lib/stickyStack";
@@ -12,7 +13,7 @@ const SideRays = dynamic(() => import("@/components/ui/SideRays"), {
   ssr: false,
 });
 
-export function HeroSection() {
+export function HeroSection({ resumeAvailable = false }: { resumeAvailable?: boolean }) {
   return (
     <section
       id="top"
@@ -107,6 +108,11 @@ export function HeroSection() {
             <BrutalistLink href="#experience" variant="primary">
               View Work <ArrowRight size={16} />
             </BrutalistLink>
+            {resumeAvailable ? (
+              <BrutalistLink href={RESUME_DOWNLOAD_PATH} variant="secondary" download>
+                Download CV <Download size={16} />
+              </BrutalistLink>
+            ) : null}
             <BrutalistLink href="#contact" variant="dark">
               Let&rsquo;s Talk
             </BrutalistLink>

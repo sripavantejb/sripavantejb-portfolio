@@ -4,7 +4,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowDown, ArrowUp, LogOut, Pencil, Plus, Trash2, ExternalLink } from "lucide-react";
 import type { ProjectAdmin } from "@/lib/models/project";
+import type { ResumeMeta } from "@/lib/models/resume";
 import { ProjectForm, type ProjectFormValues } from "@/components/admin/ProjectForm";
+import { ResumeUpload } from "@/components/admin/ResumeUpload";
 
 function toPayload(values: ProjectFormValues) {
   return {
@@ -26,7 +28,13 @@ function toPayload(values: ProjectFormValues) {
   };
 }
 
-export function AdminDashboard({ initialProjects }: { initialProjects: ProjectAdmin[] }) {
+export function AdminDashboard({
+  initialProjects,
+  initialResume,
+}: {
+  initialProjects: ProjectAdmin[];
+  initialResume: ResumeMeta | null;
+}) {
   const router = useRouter();
   const [projects, setProjects] = useState(initialProjects);
   const [mode, setMode] = useState<"idle" | "add" | { edit: string }>("idle");
@@ -127,7 +135,7 @@ export function AdminDashboard({ initialProjects }: { initialProjects: ProjectAd
         <div className="flex items-center justify-between">
           <div>
             <p className="font-inter text-xs font-semibold uppercase tracking-[0.2em] text-lime">Admin</p>
-            <h1 className="mt-1 font-archivo text-3xl tracking-tight text-white">Projects</h1>
+            <h1 className="mt-1 font-archivo text-3xl tracking-tight text-white">Admin</h1>
           </div>
           <button
             onClick={handleLogout}
@@ -143,7 +151,13 @@ export function AdminDashboard({ initialProjects }: { initialProjects: ProjectAd
           </p>
         )}
 
-        <div className="mt-8">
+        <ResumeUpload initialResume={initialResume} />
+
+        <div className="mt-10">
+          <h2 className="font-archivo text-xl tracking-tight text-white">Projects</h2>
+        </div>
+
+        <div className="mt-6">
           {mode === "add" ? (
             <ProjectForm onCancel={() => setMode("idle")} onSubmit={handleAdd} submitting={submitting} />
           ) : (
