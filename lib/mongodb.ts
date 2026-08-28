@@ -29,11 +29,21 @@ function setCached(promise: Promise<MongoClient> | undefined): void {
   }
 }
 
+function validateMongoUri(uri: string) {
+  if (!/^mongodb(\+srv)?:\/\//.test(uri)) {
+    const scheme = uri.includes("://") ? uri.split("://")[0] : "unknown";
+    throw new Error(
+      `MONGODB_URI must be a MongoDB connection string (mongodb:// or mongodb+srv://). Current value starts with "${scheme}://".`
+    );
+  }
+}
+
 function connect(): Promise<MongoClient> {
   const uri = process.env.MONGODB_URI;
   if (!uri) {
     throw new Error("Missing MONGODB_URI environment variable");
   }
+  validateMongoUri(uri);
   const promise = new MongoClient(uri, options).connect();
   // A rejected promise must not stay cached, or every later request reuses the
   // same failure and the app can never recover without a restart.

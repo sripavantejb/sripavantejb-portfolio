@@ -1,7 +1,6 @@
-import { GridFSBucket, ObjectId } from "mongodb";
+import { Binary } from "mongodb";
 import { getDb } from "@/lib/mongodb";
 
-const BUCKET = "resumes";
 const SETTINGS_KEY = "resume";
 
 export type ResumeMeta = {
@@ -10,27 +9,22 @@ export type ResumeMeta = {
   size: number;
 };
 
-type ResumeSettings = {
+type ResumeDoc = ResumeMeta & {
   key: typeof SETTINGS_KEY;
-  filename: string;
-  uploadedAt: string;
-  size: number;
-  fileId: string;
+  data: Binary;
 };
-
-async function getBucket() {
-  const db = await getDb();
-  return new GridFSBucket(db, { bucketName: BUCKET });
-}
 
 async function getSettingsCollection() {
   const db = await getDb();
-  return db.collection<ResumeSettings>("site_settings");
+  return db.collection<ResumeDoc>("site_settings");
 }
 
 export async function getResumeMetadata(): Promise<ResumeMeta | null> {
   const col = await getSettingsCollection();
-  const doc = await col.findOne({ key: SETTINGS_KEY });
+  const doc = await col.findOne(
+    { key: SETTINGS_KEY },
+    { projection: { filename: 1, uploadedAt: 1, size: 1 } }
+  );
   if (!doc) return null;
   return {
     filename: doc.filename,
@@ -42,41 +36,16 @@ export async function getResumeMetadata(): Promise<ResumeMeta | null> {
 export async function getResumeDownload(): Promise<{ buffer: Buffer; filename: string } | null> {
   const col = await getSettingsCollection();
   const doc = await col.findOne({ key: SETTINGS_KEY });
-  if (!doc?.fileId) return null;
-
-  const bucket = await getBucket();
-  const chunks: Buffer[] = [];
-
-  await new Promise<void>((resolve, reject) => {
-    bucket
-      .openDownloadStream(new ObjectId(doc.fileId))
-      .on("data", (chunk: Buffer) => chunks.push(chunk))
-      .on("error", reject)
-      .on("end", resolve);
-  });
+  if (!doc?.data) return null;
 
   return {
-    buffer: Buffer.concat(chunks),
+    buffer: Buffer.from(doc.data.buffer),
     filename: doc.filename,
   };
 }
 
 export async function uploadResume(buffer: Buffer, filename: string): Promise<ResumeMeta> {
-  await deleteResume();
-
-  const bucket = await getBucket();
   const safeName = filename.replace(/[^\w.\-() ]+/g, "_").slice(0, 120) || "resume.pdf";
-
-  const uploadStream = bucket.openUploadStream(safeName, {
-    metadata: { contentType: "application/pdf" },
-  });
-
-  await new Promise<void>((resolve, reject) => {
-    uploadStream.on("error", reject);
-    uploadStream.on("finish", resolve);
-    uploadStream.end(buffer);
-  });
-
   const meta: ResumeMeta = {
     filename: safeName,
     uploadedAt: new Date().toISOString(),
@@ -90,7 +59,7 @@ export async function uploadResume(buffer: Buffer, filename: string): Promise<Re
       $set: {
         key: SETTINGS_KEY,
         ...meta,
-        fileId: uploadStream.id.toString(),
+        data: new Binary(buffer),
       },
     },
     { upsert: true }
@@ -101,20 +70,8 @@ export async function uploadResume(buffer: Buffer, filename: string): Promise<Re
 
 export async function deleteResume(): Promise<boolean> {
   const col = await getSettingsCollection();
-  const doc = await col.findOne({ key: SETTINGS_KEY });
-  if (!doc) return false;
-
-  const bucket = await getBucket();
-  if (doc.fileId) {
-    try {
-      await bucket.delete(new ObjectId(doc.fileId));
-    } catch {
-      // File may already be gone; still clear settings.
-    }
-  }
-
-  await col.deleteOne({ key: SETTINGS_KEY });
-  return true;
+  const result = await col.deleteOne({ key: SETTINGS_KEY });
+  return result.deletedCount > 0;
 }
 
 export async function getResumeAvailability(): Promise<boolean> {
