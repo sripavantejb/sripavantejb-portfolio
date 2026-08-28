@@ -15,9 +15,11 @@ function hexToBuf(hex: string): Uint8Array {
   return bytes;
 }
 
-async function getKey(usages: KeyUsage[]): Promise<CryptoKey> {
+import { getAdminEnvStatus } from "@/lib/adminEnv";
+
+async function getKey(usages: KeyUsage[]): Promise<CryptoKey | null> {
   const secret = process.env.SESSION_SECRET;
-  if (!secret) throw new Error("Missing SESSION_SECRET environment variable");
+  if (!secret) return null;
   return crypto.subtle.importKey(
     "raw",
     new TextEncoder().encode(secret),
@@ -27,10 +29,11 @@ async function getKey(usages: KeyUsage[]): Promise<CryptoKey> {
   );
 }
 
-export async function createSessionToken(): Promise<{ token: string; maxAge: number }> {
+export async function createSessionToken(): Promise<{ token: string; maxAge: number } | null> {
+  const key = await getKey(["sign"]);
+  if (!key) return null;
   const expires = Date.now() + MAX_AGE_SECONDS * 1000;
   const payload = String(expires);
-  const key = await getKey(["sign"]);
   const sigBuf = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(payload));
   return { token: `${payload}.${bufToHex(sigBuf)}`, maxAge: MAX_AGE_SECONDS };
 }
@@ -45,6 +48,7 @@ export async function verifySessionToken(token: string | undefined | null): Prom
 
   try {
     const key = await getKey(["verify"]);
+    if (!key) return false;
     return await crypto.subtle.verify(
       "HMAC",
       key,
@@ -58,11 +62,10 @@ export async function verifySessionToken(token: string | undefined | null): Prom
 
 export async function verifyPassword(input: string): Promise<boolean> {
   const adminPassword = process.env.ADMIN_PASSWORD;
-  if (!adminPassword) throw new Error("Missing ADMIN_PASSWORD environment variable");
+  if (!adminPassword) return false;
 
-  // Compare HMAC digests (both under the session secret) rather than raw strings,
-  // and diff every byte, so timing doesn't leak how much of the password matched.
   const key = await getKey(["sign"]);
+  if (!key) return false;
   const [a, b] = await Promise.all([
     crypto.subtle.sign("HMAC", key, new TextEncoder().encode(input)),
     crypto.subtle.sign("HMAC", key, new TextEncoder().encode(adminPassword)),

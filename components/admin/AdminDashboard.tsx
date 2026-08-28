@@ -31,9 +31,11 @@ function toPayload(values: ProjectFormValues) {
 export function AdminDashboard({
   initialProjects,
   initialResume,
+  setupError,
 }: {
   initialProjects: ProjectAdmin[];
   initialResume: ResumeMeta | null;
+  setupError?: string;
 }) {
   const router = useRouter();
   const [projects, setProjects] = useState(initialProjects);
@@ -145,6 +147,12 @@ export function AdminDashboard({
           </button>
         </div>
 
+        {setupError ? (
+          <p className="mt-4 rounded-lg border border-amber-400/30 bg-amber-400/10 px-4 py-3 font-inter text-sm text-amber-200">
+            {setupError}
+          </p>
+        ) : null}
+
         {error && (
           <p className="mt-4 rounded-lg border border-red-400/30 bg-red-400/10 px-4 py-2 font-inter text-sm text-red-300">
             {error}
@@ -157,7 +165,7 @@ export function AdminDashboard({
           <h2 className="font-archivo text-xl tracking-tight text-white">Projects</h2>
         </div>
 
-        <div className="mt-6">
+        <div className={`mt-6 ${setupError ? "pointer-events-none opacity-50" : ""}`}>
           {mode === "add" ? (
             <ProjectForm onCancel={() => setMode("idle")} onSubmit={handleAdd} submitting={submitting} />
           ) : (
