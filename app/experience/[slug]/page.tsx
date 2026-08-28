@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { JsonLd } from "@/components/JsonLd";
 import { Nav } from "@/components/Nav";
 import { ExperienceDetail } from "@/components/sections/ExperienceDetail";
 import {
@@ -13,6 +13,12 @@ import {
   profile,
 } from "@/lib/data";
 import { listPublicProjects } from "@/lib/models/project";
+import {
+  buildBreadcrumbSchema,
+  buildJsonLdGraph,
+  buildWebPageSchema,
+} from "@/lib/schema";
+import { buildPageMetadata } from "@/lib/site";
 
 export const revalidate = 60;
 
@@ -24,17 +30,19 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+}) {
   const { slug } = await params;
   const role = experience.find((r) => r.slug === slug);
   if (!role) return {};
 
-  const title = `${role.title} at ${role.org} — ${profile.name}`;
-  return {
+  const title = `${role.title} at ${role.org}`;
+  const description = role.description;
+
+  return buildPageMetadata({
     title,
-    description: role.description,
-    openGraph: { title, description: role.description },
-  };
+    description,
+    path: `/experience/${slug}`,
+  });
 }
 
 export default async function ExperienceDetailPage({
@@ -55,8 +63,23 @@ export default async function ExperienceDetailPage({
   const roleCertifications = role.showEducationAndCerts ? certifications : [];
   const statHighlights = stats.filter((s) => role.statHighlightLabels?.includes(s.label));
 
+  const pageTitle = `${role.title} at ${role.org} — ${profile.name}`;
+  const experienceSchema = buildJsonLdGraph(
+    buildWebPageSchema({
+      path: `/experience/${slug}`,
+      name: pageTitle,
+      description: role.description,
+    }),
+    buildBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Experience", path: "/#experience" },
+      { name: role.org, path: `/experience/${slug}` },
+    ])
+  );
+
   return (
     <>
+      <JsonLd data={experienceSchema} />
       <Nav />
       <ExperienceDetail
         role={role}

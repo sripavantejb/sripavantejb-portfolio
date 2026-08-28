@@ -64,6 +64,7 @@ function CardBody({ project: p }: { project: Project }) {
         {p.org}
         {p.role ? ` · ${p.role}` : ""}
       </p>
+      <p className="mt-3 line-clamp-3 font-inter text-sm leading-relaxed text-ink/65">{p.description}</p>
       <div className="mt-4 flex flex-wrap gap-1.5">
         {p.stack.slice(0, 4).map((s) => (
           <span key={s} className="rounded-md bg-ink/[0.04] px-2 py-0.5 font-inter text-[11px] text-ink/55">

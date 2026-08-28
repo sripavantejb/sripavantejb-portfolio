@@ -153,6 +153,27 @@ export function ContactSection({ resumeAvailable = false }: { resumeAvailable?: 
           </motion.p>
         </motion.div>
 
+        <nav aria-label="Site sections" className="mt-4 flex flex-wrap gap-x-4 gap-y-2 border-t border-ink/10 pt-4">
+          {[
+            { href: "/about", label: "About" },
+            { href: "/#experience", label: "Experience" },
+            { href: "/#projects", label: "Projects" },
+            { href: "/#achievements", label: "Achievements" },
+            { href: profile.editco, label: "Editco Media", external: true },
+          ].map(({ href, label, external }) => (
+            <a
+              key={label}
+              href={href}
+              {...(external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              className="font-inter text-[11px] font-semibold text-ink/50 transition-colors hover:text-ink"
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+
         <p className="mt-3 font-inter text-[11px] text-ink/45">
           {profile.name} · © 2026
         </p>

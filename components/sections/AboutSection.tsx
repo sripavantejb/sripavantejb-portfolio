@@ -11,7 +11,12 @@ export function AboutSection() {
   return (
     <section id="about" className={`bg-ink py-24 md:py-32 ${sectionFlowAfter}`}>
       <div className="mx-auto max-w-[1200px] px-6">
-        <SectionHeading eyebrow="About Me" title="Builder, Designer, Founder" light />
+        <SectionHeading
+          eyebrow="About Me"
+          title="Builder, Designer, Founder"
+          description="Sri Pavan Tej Balam builds full-stack products, AI automations, and digital brands — as SDE Intern at NxtWave and Co-Founder of Editco Media."
+          light
+        />
 
         <div className="mt-12 grid items-stretch gap-12 lg:grid-cols-[0.58fr_0.42fr] lg:gap-16">
           <div className="flex flex-col justify-between">
@@ -56,18 +61,35 @@ export function AboutSection() {
                 Quick Facts
               </p>
               <dl className="mt-5 flex flex-1 flex-col justify-between gap-4">
-                {[
-                  ["Based in", profile.location],
-                  ["Current role", "SDE Intern @ NxtWave"],
-                  ["Also building", "Co-Founder @ Editco Media"],
-                  ["Studying", "CS · Data Science & ML @ NIAT"],
-                  ["Status", "Open to internships & full-time roles"],
-                ].map(([label, val]) => (
+                {(
+                  [
+                    { label: "Based in", value: profile.location },
+                    { label: "Current role", value: "SDE Intern @ NxtWave" },
+                    {
+                      label: "Also building",
+                      value: (
+                        <>
+                          Co-Founder @{" "}
+                          <a
+                            href={profile.editco}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline decoration-lime/40 underline-offset-2"
+                          >
+                            Editco Media
+                          </a>
+                        </>
+                      ),
+                    },
+                    { label: "Studying", value: "CS · Data Science & ML @ NIAT" },
+                    { label: "Status", value: "Open to internships & full-time roles" },
+                  ] 
+                ).map(({ label, value }) => (
                   <div key={label} className="flex flex-col gap-0.5 border-b border-white/10 pb-3 last:border-0">
                     <dt className="font-inter text-xs font-semibold uppercase tracking-wide text-white/40">
                       {label}
                     </dt>
-                    <dd className="font-display text-base font-medium text-white">{val}</dd>
+                    <dd className="font-display text-base font-medium text-white">{value}</dd>
                   </div>
                 ))}
               </dl>

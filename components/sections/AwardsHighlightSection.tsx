@@ -9,6 +9,7 @@ const featured = [awards[0], awards[1], awards[2]];
 export function AwardsHighlightSection() {
   return (
     <section
+      id="achievements"
       className={`flex flex-col justify-center bg-paper px-6 py-16 text-ink md:px-8 md:py-20 ${stickySlide3}`}
     >
       <div className="mx-auto w-full max-w-[1200px]">

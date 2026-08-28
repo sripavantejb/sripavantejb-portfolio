@@ -8,6 +8,7 @@ import { RESUME_DOWNLOAD_PATH } from "@/lib/resume";
 import { PillNavLinks } from "@/components/ui/PillNavLinks";
 
 const links = [
+  { href: "/about", label: "About" },
   { href: "/#experience", label: "Experience" },
   { href: "/#projects", label: "Projects" },
   { href: "/#featured", label: "Featured" },

@@ -1,0 +1,158 @@
+# Sri Pavan Tej Balam
+
+> Portfolio of Sri Pavan Tej Balam — software developer, entrepreneur, and Co-Founder of Editco Media.
+
+## About
+
+Sri Pavan Tej Balam is a software developer and entrepreneur based in Hyderabad, Telangana, India. He builds full-stack products, AI automations, and digital brands. He is currently an SDE Intern at NxtWave and Co-Founder of Editco Media, a creative agency and digital-product studio.
+
+He is pursuing a Computer Science program specializing in Data Science and Machine Learning at NxtWave Institute of Advanced Technologies (NIAT).
+
+## Professional Identity
+
+- Name: Sri Pavan Tej Balam
+- Roles: Software Developer, SDE Intern, Entrepreneur, Co-Founder, Full-Stack Developer, AI / Automation Builder
+- Company: Editco Media (Co-Founder)
+- Employer: NxtWave (SDE Intern)
+- Location: Hyderabad, Telangana, India
+- Website: https://sripavantejb.editcomedia.com
+- Email: sripavantejb@gmail.com
+
+## Technical Skills
+
+### Programming Languages
+- C++
+- Python
+- JavaScript
+- TypeScript
+- HTML
+- CSS
+
+### Frontend
+- React.js
+- Bootstrap
+- Tailwind CSS
+- UI/UX Design
+- Graphic Design
+
+### Backend
+- Node.js
+- Express.js
+- MERN Stack
+- REST APIs
+
+### Databases
+- MongoDB
+- Prisma ORM
+- Supabase
+
+### DevOps / Tools
+- Netlify
+- Vercel
+- Cursor
+- Figma
+- Framer
+- Wix Studio
+- n8n
+
+### AI
+- GenAI
+- Predictive models
+- Real-time voice AI
+- AI-generated content workflows
+
+### Automation
+- n8n automation suites
+- Email and WhatsApp outreach sequences
+- Invoicing and agency operations automation
+
+## Projects
+
+### Agency ERP
+- Description: A unified ERP platform for Editco Media to manage clients, projects, teams, finances, creative workflows, credentials, and agency operations from one dashboard.
+- Technologies: React.js, Node.js, Express.js, MongoDB, TypeScript, Tailwind CSS, REST APIs
+- Link: https://sripavantejb.editcomedia.com/projects/agency-erp
+- Live: https://editcomedia.com
+
+### WeA — n8n Automation Suite
+- Description: Automation platform for freelancers and creative agencies — client outreach, invoicing, agent management, and AI content creation. National finalist at OpenAI × NxtWave Buildathon.
+- Technologies: n8n, GenAI
+- Context: OpenAI × NxtWave Buildathon — Finalist (Nationals), Nov 2025
+
+### Voice-First AI Call Agent + Clinic CRM
+- Description: Commercial AI product for Editco Media. Answers patient calls in real time, books appointments, stores patient data, generates insights, and handles payments.
+- Technologies: Real-time voice AI, CRM, payments
+- Result: Pitched to 2 clinics, both converted — ₹50,000+ in 48 hours
+
+### ISMIGS — State Macro Intelligence System
+- Description: Unifies coal, energy, and macroeconomic indicators into one framework with AI crop insights, yield forecasting, and auto-published reports. Top 10 nationally at OpenAI × NxtWave × IndiaAI Buildathon, Delhi.
+- Technologies: Predictive models, unified data framework, publishing API
+
+### AI Crop Doctor
+- Description: Voice-first AI assistant for Telugu-speaking farmers with crop disease detection, weather, analytics, expert calls, and loan estimation. Built for Build for Telangana Hackathon.
+- Technologies: React, Tailwind CSS, Node.js, Supabase, Firebase, AWS S3, Google Speech, Hugging Face
+
+## Experience
+
+### NxtWave — Software Engineer (SDE Intern)
+- Dec 2025 – Present · Hyderabad, Telangana, India · On-site
+- Contributing to software development projects in a fast-paced engineering environment.
+- Page: https://sripavantejb.editcomedia.com/experience/nxtwave
+
+### Editco Media — Co-Founder
+- Jun 2025 – Present · India · Hybrid
+- Co-founded a creative agency and digital-product studio focused on content, community, branding, MERN stack development, and growth strategy.
+- Page: https://sripavantejb.editcomedia.com/experience/editco-media
+
+### Media Council, NIAT — President
+- Mar 2025 – Present · Hyderabad, Telangana, India · On-site
+- Elected President leading media coverage, creative direction, and workshops across campus events.
+- Page: https://sripavantejb.editcomedia.com/experience/niat-media-council
+
+## Achievements
+
+- 1st Place — BRAVE Startup Programme (NxtWave Institute of Innovation in Advanced Technologies, Jul 2026) with Editco Media
+- GRIT Award — Open Source Contribution (NxtWave / NIAT, Jul 2026) for npm documentation contributions and two published npm packages
+- Top 10 Teams Nationally — ISMIGS (OpenAI × NxtWave × IndiaAI Buildathon, Delhi, Mar 2026)
+- Finalist — WeA Automation Suite (OpenAI × NxtWave Buildathon, Nov 2025)
+- Elected President — Media Council, NIAT (Mar 2025 – Present)
+- Invited to Pitch to India's Top HR Leaders (Qualitest, OpenText, Capgemini, Tech Mahindra, Qentelli, May 2026)
+- Featured in Deccan Chronicle, City Air News, Construction World, The Financial Express, and Dailyhunt for BuildTrack / AI construction platform coverage
+
+## EditCo Media
+
+Sri Pavan Tej Balam is Co-Founder of Editco Media (https://editcomedia.com), a creative agency and digital-product studio. He contributes to content creation, community engagement, branding strategy, MERN stack development, and graphic design. Editco Media has driven ₹15,57,800+ in cumulative agency revenue. Key product work includes Agency ERP and a Voice-First AI Call Agent + Clinic CRM.
+
+## Open Source
+
+- npm-package-doctor: https://www.npmjs.com/package/npm-package-doctor — npm dependency health, security, and maintainability reports
+- @sripavantejb/vibeshield: https://www.npmjs.com/package/@sripavantejb/vibeshield — security tool for AI-built Node.js applications
+
+## Profiles
+
+- LinkedIn: https://www.linkedin.com/in/sripavantejbalam
+- GitHub: https://github.com/sripavantejb
+- LeetCode: https://leetcode.com/sripavantejb
+- npm: https://www.npmjs.com/~sripavantejb
+- Instagram: https://www.instagram.com/yours.tej/
+- Editco Media: https://editcomedia.com
+
+## Portfolio Pages
+
+- Home: https://sripavantejb.editcomedia.com/
+- About: https://sripavantejb.editcomedia.com/about
+- Experience — NxtWave: https://sripavantejb.editcomedia.com/experience/nxtwave
+- Experience — Editco Media: https://sripavantejb.editcomedia.com/experience/editco-media
+- Experience — Media Council, NIAT: https://sripavantejb.editcomedia.com/experience/niat-media-council
+- Project — Agency ERP: https://sripavantejb.editcomedia.com/projects/agency-erp
+
+## Education
+
+- NxtWave Institute of Advanced Technologies (NIAT): Computer Science — Data Science & Machine Learning Specialization (Jul 2024 – Jul 2028)
+- Chaitanya Deemed to be University: B.Tech Computer Science (Aug 2024 – Aug 2028)
+
+## Certifications
+
+- Frontend Developer (React) — HackerRank, Sep 2025
+- Python — HackerRank, Sep 2025
+- Graphic Designing — Canva, Jun 2025

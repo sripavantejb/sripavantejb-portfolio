@@ -47,8 +47,8 @@ export function WhyMeSection() {
             <span className="inline bg-lime px-1.5 text-ink md:px-2">that should exist.</span>
           </h2>
           <p className="mt-4 max-w-xl font-inter text-sm font-medium leading-relaxed text-ink/65 md:text-base">
-            I&rsquo;m a full-stack developer who likes taking messy problems, figuring out how they work, and turning
-            them into products people can actually use.
+            I&rsquo;m Sri Pavan Tej Balam — a full-stack developer who likes taking messy problems, figuring out how
+            they work, and turning them into products people can actually use.
           </p>
         </MotionItem>
 

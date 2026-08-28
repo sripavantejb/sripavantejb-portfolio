@@ -71,7 +71,7 @@ export function HeroSection({ resumeAvailable = false }: { resumeAvailable?: boo
               transition={{ duration: 0.9, ease: EASE }}
               className="block bg-gradient-to-b from-white to-white/40 bg-clip-text text-[clamp(2.5rem,10vw,5.5rem)] text-transparent"
             >
-              Sri Pavan
+              Sri Pavan{" "}
             </motion.span>
             <motion.span
               initial={{ opacity: 0, y: 48 }}

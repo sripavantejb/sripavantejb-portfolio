@@ -27,6 +27,7 @@ import {
   type LeadershipItem,
   type PostEmbed,
   type Project,
+  profile,
 } from "@/lib/data";
 import { BrutalistLink } from "@/components/ui/BrutalistLink";
 
@@ -167,7 +168,18 @@ export function ExperienceDetail({
               </h1>
 
               <p className="mt-3 font-archivo text-lg uppercase tracking-tight text-lime md:text-xl">
-                {role.org}
+                {role.slug === "editco-media" ? (
+                  <a
+                    href={profile.editco}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-lime/50 underline-offset-4 transition-colors hover:decoration-lime"
+                  >
+                    {role.org}
+                  </a>
+                ) : (
+                  role.org
+                )}
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2.5">
