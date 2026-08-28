@@ -1,11 +1,6 @@
 import { MongoClient, type Db } from "mongodb";
 
-const uri = process.env.MONGODB_URI;
 const dbName = process.env.MONGODB_DB || "sripavantejb";
-
-if (!uri) {
-  throw new Error("Missing MONGODB_URI environment variable");
-}
 
 declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
@@ -35,7 +30,11 @@ function setCached(promise: Promise<MongoClient> | undefined): void {
 }
 
 function connect(): Promise<MongoClient> {
-  const promise = new MongoClient(uri!, options).connect();
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    throw new Error("Missing MONGODB_URI environment variable");
+  }
+  const promise = new MongoClient(uri, options).connect();
   // A rejected promise must not stay cached, or every later request reuses the
   // same failure and the app can never recover without a restart.
   promise.catch(() => {
