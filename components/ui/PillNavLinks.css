@@ -27,6 +27,7 @@
   height: 100%;
   padding: 0 14px;
   color: var(--pill-text, rgba(255, 255, 255, 0.7));
+  transition: color 0.3s ease;
   text-decoration: none;
   border-radius: 9999px;
   box-sizing: border-box;

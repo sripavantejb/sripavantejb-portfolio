@@ -11,6 +11,7 @@ export function PillNavLinks({
   ease = "power3.out",
   baseColor = "#c8f542",
   hoveredTextColor = "#0a0a0a",
+  textColor,
   className = "",
   onItemClick,
 }: {
@@ -18,6 +19,7 @@ export function PillNavLinks({
   ease?: string;
   baseColor?: string;
   hoveredTextColor?: string;
+  textColor?: string;
   className?: string;
   onItemClick?: () => void;
 }) {
@@ -99,6 +101,7 @@ export function PillNavLinks({
   const cssVars = {
     ["--base" as string]: baseColor,
     ["--hover-text" as string]: hoveredTextColor,
+    ...(textColor ? { ["--pill-text" as string]: textColor } : {}),
   } as CSSProperties;
 
   return (

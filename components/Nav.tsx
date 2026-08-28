@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X, Download } from "lucide-react";
 import { profile } from "@/lib/data";
@@ -18,15 +18,86 @@ const links = [
   { href: "/#contact", label: "Contact" },
 ];
 
+function parseCssColor(input: string) {
+  if (!input || input === "transparent") return null;
+
+  const rgb = input.match(/rgba?\(([^)]+)\)/i);
+  if (rgb) {
+    const parts = rgb[1]
+      .replace(/\//g, " ")
+      .split(/[\s,]+/)
+      .filter(Boolean)
+      .map(Number);
+    if (parts.length >= 3 && parts.every((n) => !Number.isNaN(n))) {
+      return { r: parts[0], g: parts[1], b: parts[2], a: parts[3] ?? 1 };
+    }
+  }
+
+  const oklch = input.match(/oklch\(([^)]+)\)/i);
+  if (oklch) {
+    const parts = oklch[1].replace(/\//g, " ").split(/[\s,]+/).filter(Boolean);
+    const raw = parts[0] ?? "";
+    let lightness = parseFloat(raw);
+    if (Number.isNaN(lightness)) return null;
+    if (raw.includes("%") || lightness > 1) lightness /= 100;
+    const gray = lightness * 255;
+    const alpha = parts[3] !== undefined ? parseFloat(parts[3]) : 1;
+    return { r: gray, g: gray, b: gray, a: Number.isNaN(alpha) ? 1 : alpha };
+  }
+
+  return null;
+}
+
+function isLightBehind(chrome: HTMLElement | null) {
+  if (!chrome || typeof document === "undefined") return false;
+  const rect = chrome.getBoundingClientRect();
+  const x = Math.min(window.innerWidth - 2, Math.max(2, rect.left + rect.width / 2));
+  const y = Math.min(window.innerHeight - 2, Math.max(2, rect.top + rect.height / 2));
+
+  for (const node of document.elementsFromPoint(x, y)) {
+    if (!(node instanceof Element) || chrome.contains(node) || node === chrome) continue;
+    let el: Element | null = node;
+    while (el && el !== document.documentElement) {
+      if (chrome.contains(el)) {
+        el = el.parentElement;
+        continue;
+      }
+      const parsed = parseCssColor(getComputedStyle(el).backgroundColor);
+      if (parsed && parsed.a > 0.2) {
+        const luminance = (0.2126 * parsed.r + 0.7152 * parsed.g + 0.0722 * parsed.b) / 255;
+        return luminance > 0.45;
+      }
+      el = el.parentElement;
+    }
+  }
+  return false;
+}
+
 export function Nav({ resumeAvailable = false }: { resumeAvailable?: boolean }) {
+  const chromeRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [onLight, setOnLight] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      setScrolled(window.scrollY > 40);
+      setOnLight(isLightBehind(chromeRef.current));
+    };
+    const schedule = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
 
   useEffect(() => {
@@ -38,10 +109,12 @@ export function Nav({ resumeAvailable = false }: { resumeAvailable?: boolean }) 
 
   return (
     <>
-      <div className="fixed inset-x-0 top-4 z-[9999] flex justify-center px-4 md:top-6">
+      <div ref={chromeRef} className="fixed inset-x-0 top-4 z-[9999] flex justify-center px-4 md:top-6">
         <nav
-          className={`flex items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1.5 shadow-2xl backdrop-blur-md transition-all ${
-            scrolled ? "bg-ink/70" : ""
+          className={`flex items-center gap-1 rounded-full border p-1.5 shadow-2xl backdrop-blur-md transition-colors duration-300 ${
+            onLight
+              ? `border-ink/15 ${scrolled ? "bg-white/85" : "bg-white/70"}`
+              : `border-white/10 ${scrolled ? "bg-ink/70" : "bg-white/5"}`
           }`}
         >
           <motion.a
@@ -53,7 +126,10 @@ export function Nav({ resumeAvailable = false }: { resumeAvailable?: boolean }) 
             SPTB
           </motion.a>
           <div className="hidden md:flex">
-            <PillNavLinks items={links} />
+            <PillNavLinks
+              items={links}
+              textColor={onLight ? "rgba(10, 10, 10, 0.78)" : "rgba(255, 255, 255, 0.72)"}
+            />
           </div>
           <a
             href={`mailto:${profile.email}`}
@@ -65,7 +141,9 @@ export function Nav({ resumeAvailable = false }: { resumeAvailable?: boolean }) 
             <a
               href={RESUME_DOWNLOAD_PATH}
               download
-              className="hidden rounded-full border border-lime px-4 py-2 font-archivo text-xs font-black uppercase tracking-wide text-lime md:inline-flex"
+              className={`hidden rounded-full border px-4 py-2 font-archivo text-xs font-black uppercase tracking-wide md:inline-flex ${
+                onLight ? "border-ink text-ink" : "border-lime text-lime"
+              }`}
             >
               CV
             </a>
@@ -73,7 +151,9 @@ export function Nav({ resumeAvailable = false }: { resumeAvailable?: boolean }) 
           <button
             onClick={() => setOpen(true)}
             aria-label="Open menu"
-            className="ml-1 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white md:hidden"
+            className={`ml-1 flex h-9 w-9 items-center justify-center rounded-full border md:hidden ${
+              onLight ? "border-ink/20 bg-white/40 text-ink" : "border-white/10 bg-white/5 text-white"
+            }`}
           >
             <Menu size={18} />
           </button>
