@@ -37,16 +37,19 @@ function PressCard({
           sizes={sizes}
           className="object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
         />
-        <span className="absolute left-3 top-3 border-2 border-ink bg-lime px-2 py-0.5 font-archivo text-[10px] uppercase tracking-wide text-ink shadow-[3px_3px_0_0_#0a0a0a]">
-          {item.publication}
-        </span>
       </div>
       <div className={`flex flex-1 flex-col ${featured ? "p-6 md:p-8" : "p-5 md:p-6"}`}>
-        <p className="font-inter text-[11px] font-semibold uppercase tracking-[0.18em] text-lime">
-          {item.publication}
-        </p>
+        <div className="flex h-11 w-fit items-center bg-white px-3 py-1.5">
+          <Image
+            src={item.logo}
+            alt={`${item.publication} logo`}
+            width={featured ? 180 : 140}
+            height={32}
+            className="h-7 w-auto max-w-[160px] object-contain object-left"
+          />
+        </div>
         <h3
-          className={`mt-3 font-archivo uppercase leading-tight tracking-tight text-white ${
+          className={`mt-4 font-archivo uppercase leading-tight tracking-tight text-white ${
             featured ? "text-xl md:text-2xl" : "text-base md:text-lg"
           }`}
         >
@@ -67,8 +70,7 @@ function PressCard({
 }
 
 export function FeaturedInSection() {
-  const featured = pressFeatures.find((p) => p.featured) ?? pressFeatures[0];
-  const rest = pressFeatures.filter((p) => p !== featured);
+  const [featured, ...rest] = pressFeatures;
 
   return (
     <section id="featured" className={`bg-[#050505] py-24 md:py-32 ${sectionFlowAfter}`}>
@@ -85,7 +87,27 @@ export function FeaturedInSection() {
           4+ publications · Featured across technology, business & industry media
         </p>
 
-        <div className="mt-12">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
+          {pressFeatures.map((item) => (
+            <a
+              key={item.publication}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex h-12 items-center border border-white/15 bg-white px-4 py-2 transition-colors hover:border-lime"
+            >
+              <Image
+                src={item.logo}
+                alt={item.publication}
+                width={140}
+                height={32}
+                className="h-7 w-auto max-w-[140px] object-contain"
+              />
+            </a>
+          ))}
+        </div>
+
+        <div className="mt-10">
           <PressCard item={featured} featured sizes="(max-width: 1100px) 100vw, 1100px" />
         </div>
 

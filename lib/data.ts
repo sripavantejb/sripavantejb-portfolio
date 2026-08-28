@@ -306,6 +306,7 @@ export type PressFeature = {
   body: string;
   href: string;
   image: { src: string; alt: string };
+  logo: string;
   stat: string;
   featured?: boolean;
 };
@@ -313,6 +314,18 @@ export type PressFeature = {
 export const pressFeatures: PressFeature[] = [
   {
     featured: true,
+    publication: "Deccan Chronicle",
+    title: "NIAT Students’ AI Construction Platform Wins International Industry Trip",
+    body: "Featured in Deccan Chronicle for building BuildTrack, an AI-powered construction cost intelligence platform for construction companies.",
+    href: "https://www.deccanchronicle.com/technology/in-other-news/niat-students-ai-construction-platform-wins-international-industry-trip-1971956",
+    image: {
+      src: "/images/press/deccan-chronicle.jpg",
+      alt: "Screenshot hero from Deccan Chronicle — NIAT students receiving the TakeOver 2026 award on stage",
+    },
+    logo: "/images/press/logos/deccan-chronicle.png",
+    stat: "3.5M+ Monthly Unique Visitors",
+  },
+  {
     publication: "City Air News",
     title:
       "AI Construction Platform developed by NIAT students Wins Heart of Mivi and Sid’s Farm Founders; Wins International Industry Trip to Learn",
@@ -322,18 +335,8 @@ export const pressFeatures: PressFeature[] = [
       src: "/images/press/city-air-news.jpg",
       alt: "BuildTrack team receiving recognition on stage with Sid’s Farm and NIAT leaders at TakeOver 2026, as featured in City Air News",
     },
+    logo: "/images/press/logos/city-air-news.png",
     stat: "114K+ Monthly Unique Visitors",
-  },
-  {
-    publication: "Deccan Chronicle",
-    title: "NIAT Students’ AI Construction Platform Wins International Industry Trip",
-    body: "Featured in Deccan Chronicle for building BuildTrack, an AI-powered construction cost intelligence platform for construction companies.",
-    href: "https://www.deccanchronicle.com/technology/in-other-news/niat-students-ai-construction-platform-wins-international-industry-trip-1971956",
-    image: {
-      src: "/images/press/deccan-chronicle.jpg",
-      alt: "Screenshot hero from Deccan Chronicle — NIAT students receiving the TakeOver 2026 award on stage",
-    },
-    stat: "3.5M+ Monthly Unique Visitors",
   },
   {
     publication: "Construction World",
@@ -344,6 +347,7 @@ export const pressFeatures: PressFeature[] = [
       src: "/images/press/construction-world.jpg",
       alt: "Hero image from Construction World — BuildTrack team with the BRAVE award at TakeOver 2026",
     },
+    logo: "/images/press/logos/construction-world.png",
     stat: "200K+ Unique Visitors · 1M+ Monthly Page Views",
   },
   {
@@ -355,6 +359,7 @@ export const pressFeatures: PressFeature[] = [
       src: "/images/press/financial-express.jpg",
       alt: "Hero image from The Financial Express story on India’s Gen-Z builders and NIAT student products",
     },
+    logo: "/images/press/logos/financial-express.png",
     stat: "The Financial Express",
   },
   {
@@ -366,6 +371,7 @@ export const pressFeatures: PressFeature[] = [
       src: "/images/press/dailyhunt.jpg",
       alt: "BuildTrack team on stage at TakeOver 2026 — coverage syndicated across Dailyhunt",
     },
+    logo: "/images/press/logos/dailyhunt.png",
     stat: "155M+ App Installs · 13M+ Monthly Unique Visitors",
   },
 ];
