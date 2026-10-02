@@ -14,18 +14,20 @@ function PhotoFrame({
   priority,
   className,
   imageClassName,
+  style,
 }: {
   photo: HackathonPhoto;
   sizes: string;
   priority?: boolean;
   className: string;
   imageClassName?: string;
+  style?: React.CSSProperties;
 }) {
   const contain = "fit" in photo && photo.fit === "contain";
   const caption = "caption" in photo ? photo.caption : undefined;
 
   return (
-    <figure className={`relative overflow-hidden ${className}`}>
+    <figure className={`relative overflow-hidden ${className}`} style={style}>
       <Image
         src={photo.src}
         alt={photo.alt}
@@ -44,7 +46,7 @@ function PhotoFrame({
 }
 
 export function HackathonsSection() {
-  const [featured, wea, telangana] = hackathons;
+  const [featured, ...others] = hackathons;
   const [pitch, finale] = featured.photos;
 
   return (
@@ -120,9 +122,10 @@ export function HackathonsSection() {
         </motion.article>
 
         <div className="mt-5 grid gap-5 md:grid-cols-2">
-          {[wea, telangana].map((h, i) => {
-            const photo = h.photos[0];
+          {others.map((h, i) => {
+            const photo: HackathonPhoto = h.photos[0];
             const contain = "fit" in photo && photo.fit === "contain";
+            const background = "background" in photo ? photo.background : "#3d0c14";
 
             return (
               <motion.article
@@ -136,7 +139,8 @@ export function HackathonsSection() {
                 <PhotoFrame
                   photo={photo}
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className={contain ? "aspect-[800/562] bg-[#3d0c14]" : "aspect-[3/2]"}
+                  className={contain ? "aspect-[800/562]" : "aspect-[3/2]"}
+                  style={contain ? { backgroundColor: background } : undefined}
                   imageClassName={contain ? "object-contain" : "object-cover object-center"}
                 />
                 {contain && "caption" in photo && photo.caption ? (

@@ -283,6 +283,26 @@ export const hackathons = [
       },
     ],
   },
+  {
+    event: "HackWithHyderabad 3.0",
+    result: "Participant",
+    title: "HackWithHyderabad 3.0 — 8-Hour Technology Hackathon",
+    body: "The third edition of HackWithHyderabad, organised by Hack With India × Devnovate and hosted at the Microsoft Office, Hyderabad. An 8-hour sprint built around creativity, problem-solving, and collaboration — bringing builders together to learn, ideate, and ship within a single day.",
+    label: "About the event",
+    tags: ["Hack With India × Devnovate", "Microsoft Office, Hyderabad", "8 Hours", "3rd Edition", "Problem Solving", "Collaboration"],
+    when: "October 3, 2026",
+    photos: [
+      {
+        src: "/images/hackathons/hackwithhyderabad-certificate.jpg",
+        alt: "Certificate of participation for HackWithHyderabad 3.0 by Hack With India × Devnovate, awarded to Sri Pavan Tej Balam",
+        caption: "Certificate of Participation — 3 October 2026",
+        width: 1604,
+        height: 1202,
+        fit: "contain" as const,
+        background: "#eef1fb",
+      },
+    ],
+  },
 ] as const;
 
 export const npmPackages = [
