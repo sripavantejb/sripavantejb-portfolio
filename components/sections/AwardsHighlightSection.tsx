@@ -28,7 +28,7 @@ export function AwardsHighlightSection() {
             <span className="inline-block bg-ink px-2 text-lime">national stage</span>
           </h2>
           <p className="mt-3 max-w-2xl font-inter text-sm font-medium leading-relaxed text-ink/65 md:text-base">
-            One startup win, one open-source award, one national Top 10 — earned in the last twelve months.
+            A Hacktoberfest win, a startup first place, and an open-source award — earned in the last twelve months.
           </p>
         </motion.div>
 

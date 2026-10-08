@@ -47,7 +47,7 @@ function PhotoFrame({
 
 export function HackathonsSection() {
   const [featured, ...others] = hackathons;
-  const [pitch, finale] = featured.photos;
+  const [pitch, ...morePhotos] = featured.photos;
 
   return (
     <section id="hackathons" className={`bg-lime py-24 text-ink md:py-32 ${sectionFlowAfter}`}>
@@ -81,7 +81,7 @@ export function HackathonsSection() {
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="h-full min-h-full w-full"
-                imageClassName="object-cover object-[center_20%]"
+                imageClassName="object-cover object-[center_18%]"
               />
             </div>
             <div className="flex flex-col justify-center p-6 md:p-8">
@@ -113,12 +113,26 @@ export function HackathonsSection() {
             </div>
           </div>
 
-          <PhotoFrame
-            photo={finale}
-            sizes="(max-width: 1100px) 100vw, 1100px"
-            className="aspect-[3/2] border-t-4 border-ink md:aspect-[2/1]"
-            imageClassName="object-cover object-[center_42%]"
-          />
+          {morePhotos.length === 1 ? (
+            <PhotoFrame
+              photo={morePhotos[0]}
+              sizes="(max-width: 1100px) 100vw, 1100px"
+              className="aspect-[3/2] border-t-4 border-ink md:aspect-[2/1]"
+              imageClassName="object-cover object-[center_42%]"
+            />
+          ) : (
+            <div className="grid border-t-4 border-ink md:grid-cols-2">
+              {morePhotos.map((photo, index) => (
+                <PhotoFrame
+                  key={photo.src}
+                  photo={photo}
+                  sizes="(max-width: 768px) 100vw, 550px"
+                  className={`aspect-[3/2] ${index > 0 ? "border-t-4 border-ink md:border-l-4 md:border-t-0" : ""}`}
+                  imageClassName="object-cover object-center"
+                />
+              ))}
+            </div>
+          )}
         </motion.article>
 
         <div className="mt-5 grid gap-5 md:grid-cols-2">

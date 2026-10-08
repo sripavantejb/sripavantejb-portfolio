@@ -2,12 +2,15 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { ArrowRight, Download, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { profile } from "@/lib/data";
 import { RESUME_DOWNLOAD_PATH } from "@/lib/resume";
-import { BrutalistLink } from "@/components/ui/BrutalistLink";
+import { Link001, Link004, Link005 } from "@/components/ui/skiper-ui/skiper40";
 import { StaggerWords, EASE } from "@/components/motion";
 import { stickySlide1 } from "@/lib/stickyStack";
+
+const heroLinkClass =
+  "font-archivo text-lg uppercase tracking-wide text-white md:text-xl";
 
 const SideRays = dynamic(() => import("@/components/ui/SideRays"), {
   ssr: false,
@@ -103,19 +106,19 @@ export function HeroSection({ resumeAvailable = false }: { resumeAvailable?: boo
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.75, ease: EASE }}
-            className="mt-8 flex flex-wrap gap-4"
+            className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5"
           >
-            <BrutalistLink href="#experience" variant="primary">
-              View Work <ArrowRight size={16} />
-            </BrutalistLink>
+            <Link005 href="#experience" className={`${heroLinkClass} text-lime`}>
+              View Work
+            </Link005>
             {resumeAvailable ? (
-              <BrutalistLink href={RESUME_DOWNLOAD_PATH} variant="secondary" download>
-                Download CV <Download size={16} />
-              </BrutalistLink>
+              <Link001 href={RESUME_DOWNLOAD_PATH} className={heroLinkClass}>
+                Download CV
+              </Link001>
             ) : null}
-            <BrutalistLink href="#contact" variant="dark">
+            <Link004 href="#contact" className={heroLinkClass}>
               Let&rsquo;s Talk
-            </BrutalistLink>
+            </Link004>
           </motion.div>
         </div>
       </div>

@@ -10,6 +10,7 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: projectRoot,
   },
+  transpilePackages: ["@designcodeio/threeui"],
   experimental: {
     optimizePackageImports: ["lucide-react", "react-icons", "framer-motion"],
   },

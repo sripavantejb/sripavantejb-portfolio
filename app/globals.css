@@ -130,3 +130,15 @@ body {
 .animate-pulse-glow {
   animation: pulse-glow 4s ease-in-out infinite;
 }
+
+/* ThreeUI landing-page frames need an explicit box; children use height: 100%. */
+.shader-frame {
+  position: relative;
+  width: 100%;
+  height: min(70svh, 640px);
+  min-height: 420px;
+  overflow: hidden;
+  contain: strict;
+  content-visibility: auto;
+  contain-intrinsic-size: 640px;
+}

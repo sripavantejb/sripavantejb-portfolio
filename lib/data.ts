@@ -208,6 +208,39 @@ export const aiBuilds: AIBuild[] = [
 
 export const hackathons = [
   {
+    event: "MLH Hacktoberfest 2026 — React Hyderabad",
+    result: "Winner",
+    title: "Gitora — Open Source Repository Visualizer",
+    body: "Built with Hafsa Rumaiza and Supritha during MLH Hacktoberfest 2026 at React Hyderabad, where the team was recognized as a winner. Gitora helps developers understand complex open-source repositories by entering a repository URL. It generates an interactive flowchart of the project's entities, relationships, and overall structure, so an unfamiliar codebase is easier to navigate.",
+    label: "Built with",
+    tags: ["React", "JavaScript", "GitHub API", "Open Source"],
+    team: "Sri Pavan Tej Balam · Hafsa Rumaiza · Supritha",
+    when: "October 2026",
+    photos: [
+      {
+        src: "/images/hackathons/gitora-winners.jpg",
+        alt: "Gitora team recognized as winners at MLH Hacktoberfest 2026, React Hyderabad, holding event pouches in front of the React Hyderabad banner",
+        caption: "Winners — MLH Hacktoberfest, React Hyderabad",
+        width: 768,
+        height: 1024,
+      },
+      {
+        src: "/images/hackathons/gitora-building.jpg",
+        alt: "Hafsa Rumaiza, Sri Pavan Tej Balam, and Supritha building Gitora on laptops during MLH Hacktoberfest at React Hyderabad",
+        caption: "Building Gitora during the hackathon",
+        width: 1024,
+        height: 682,
+      },
+      {
+        src: "/images/hackathons/gitora-stage.jpg",
+        alt: "The Gitora team on stage in front of screens reading Meet the Communities Behind the Day, with React Hyderabad, MLH, and DEV",
+        caption: "On stage with React Hyderabad, MLH, and DEV",
+        width: 1024,
+        height: 682,
+      },
+    ],
+  },
+  {
     event: "OpenAI × NxtWave × IndiaAI Buildathon",
     result: "Top 10 Finalist",
     title: "ISMIGS — India State Macro Intelligence & Governance System",
@@ -405,6 +438,13 @@ export type Award = {
 };
 
 export const awards: Award[] = [
+  {
+    title: "Winner — MLH Hacktoberfest 2026",
+    issuer: "MLH × React Hyderabad",
+    when: "Oct 2026",
+    detail:
+      "Won with Gitora, an open-source repository visualizer built with Hafsa Rumaiza and Supritha. Enter a repo URL and it maps entities, relationships, and structure as an interactive flowchart.",
+  },
   {
     title: "1st Place — BRAVE Startup Programme",
     issuer: "NxtWave Institute of Innovation in Advanced Technologies",
