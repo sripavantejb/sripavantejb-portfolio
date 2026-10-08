@@ -47,7 +47,8 @@ function PhotoFrame({
 
 export function HackathonsSection() {
   const [featured, ...others] = hackathons;
-  const [pitch, ...morePhotos] = featured.photos;
+  const pitch = featured.photos[0];
+  const morePhotos: readonly HackathonPhoto[] = featured.photos.slice(1);
 
   return (
     <section id="hackathons" className={`bg-lime py-24 text-ink md:py-32 ${sectionFlowAfter}`}>
